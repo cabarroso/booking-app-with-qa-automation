@@ -10,3 +10,11 @@ def booking_service() -> BookingService:
 @pytest.fixture
 def booking_data():
     return generate_booking_data()
+
+@pytest.fixture
+def bookings_response(booking_service: BookingService):
+    return booking_service.get_bookings()
+
+@pytest.fixture
+def bookings(bookings_response) -> list:
+    return bookings_response.json()

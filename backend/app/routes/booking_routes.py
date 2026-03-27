@@ -1,6 +1,6 @@
 from typing import List
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app.database import SessionLocal
@@ -38,3 +38,12 @@ def create_booking(booking: BookingCreate, db: Session = Depends(get_db)):
 @router.get("/bookings", response_model=List[BookingResponse], status_code=200)
 def get_bookings(db: Session = Depends(get_db)):
     return db.query(Booking).all()
+
+@router.get("/bookings/{booking_id}", response_model=BookingResponse, status_code=200)
+def get_booking(booking_id: int, db: Session = Depends(get_db)):
+    booking = db.get(Booking, booking_id)
+
+    if not booking:
+        raise HTTPException(status_code=404, detail="Booking not found")
+    
+    return booking

@@ -1,3 +1,5 @@
+from typing import List
+
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
@@ -32,3 +34,7 @@ def create_booking(booking: BookingCreate, db: Session = Depends(get_db)):
     db.refresh(new_booking)
 
     return new_booking
+
+@router.get("/bookings", response_model=List[BookingResponse], status_code=200)
+def get_bookings(db: Session = Depends(get_db)):
+    return db.query(Booking).all()

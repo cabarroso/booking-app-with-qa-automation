@@ -18,3 +18,7 @@ def bookings_response(booking_service: BookingService):
 @pytest.fixture
 def bookings(bookings_response) -> list:
     return bookings_response.json()
+
+@pytest.fixture
+def last_booking_id(bookings: list) -> int:
+    return bookings[-1]["id"]

@@ -3,6 +3,7 @@ from framework.utils.data_generator import generate_booking_data
 
 import pytest
 
+@pytest.mark.post_booking
 def test_create_booking(booking_service, booking_data):
     response = booking_service.create_booking(booking_data)
 
@@ -23,6 +24,7 @@ def test_create_booking(booking_service, booking_data):
     assert response_data["check_out"] == booking_data["check_out"]
     assert response_data["additional_needs"] == booking_data["additional_needs"]
 
+@pytest.mark.post_booking
 @pytest.mark.parametrize("field", ["first_name", "total_price", "check_in"])
 def test_missing_field(booking_service, booking_data, field):
     del booking_data[field]
@@ -31,6 +33,7 @@ def test_missing_field(booking_service, booking_data, field):
 
     assert response.status_code == 422
 
+@pytest.mark.post_booking
 @pytest.mark.parametrize("field, value", 
                         [("first_name", 1337), 
                          ("total_price", "fifty"), 

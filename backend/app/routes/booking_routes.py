@@ -47,3 +47,24 @@ def get_booking(booking_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Booking not found")
     
     return booking
+
+@router.put("/bookings/{booking_id}", response_model=BookingResponse, status_code=200)
+def put_booking(booking_id: int, updated_booking: BookingCreate, db: Session = Depends(get_db)):
+    booking = db.get(Booking, booking_id)
+
+    if not booking:
+        raise HTTPException(status_code=404, detail="Booking not found")
+    
+    booking.first_name = updated_booking.first_name
+    booking.last_name = updated_booking.last_name
+    booking.total_price = updated_booking.total_price
+    booking.deposit_paid = updated_booking.deposit_paid
+    booking.check_in = updated_booking.check_in
+    booking.check_out = updated_booking.check_out
+    booking.additional_needs = updated_booking.additional_needs
+    
+    db.add(booking)
+    db.commit()
+    db.refresh(booking)
+    
+    return booking

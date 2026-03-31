@@ -20,7 +20,6 @@ def test_update_booking(booking_service, booking_data, last_booking_id):
     assert updated_booking["check_out"] == booking_data["check_out"]
     assert updated_booking["additional_needs"] == booking_data["additional_needs"]
 
-
 @pytest.mark.put_booking
 def test_update_booking_id_doesnt_exist(booking_service, booking_data, last_booking_id):
     response = booking_service.update_booking(last_booking_id + 1, booking_data)

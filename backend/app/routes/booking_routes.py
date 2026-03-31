@@ -68,3 +68,15 @@ def put_booking(booking_id: int, updated_booking: BookingCreate, db: Session = D
     db.refresh(booking)
     
     return booking
+
+@router.delete("/bookings/{booking_id}", status_code=204)
+def put_booking(booking_id: int, db: Session = Depends(get_db)):
+    booking = db.get(Booking, booking_id)
+    
+    if not booking:
+        raise HTTPException(status_code=404, detail="Booking not found")
+    
+    db.delete(booking)
+    db.commit()
+
+    return None

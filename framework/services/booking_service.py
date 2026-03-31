@@ -46,4 +46,7 @@ class BookingService:
     
     def update_booking(self, booking_id, data):
         return self._request("PUT", f"/bookings/{booking_id}", json=data)
+    
+    def delete_booking(self, booking_id):
+        return self._request("DELETE", f"/bookings/{booking_id}")
         

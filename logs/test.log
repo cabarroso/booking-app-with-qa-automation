@@ -71,3 +71,103 @@
 2026-03-30 13:44:29,369 | booking_service | INFO | [req: 26bbb675] PAYLOAD: {'first_name': 'Steven', 'last_name': 'Lopez', 'total_price': 199, 'deposit_paid': False, 'check_in': '2026-04-03', 'check_out': '2026-04-12', 'additional_needs': 'benefit'}
 2026-03-30 13:44:31,421 | booking_service | INFO | [req: 26bbb675] RESPONSE PUT /bookings/114 | 200 | 2.051s
 2026-03-30 13:44:31,421 | booking_service | INFO | [req: 26bbb675] RESPONSE BODY: {'first_name': 'Steven', 'last_name': 'Lopez', 'total_price': 199, 'deposit_paid': False, 'check_in': '2026-04-03', 'check_out': '2026-04-12', 'additional_needs': 'benefit', 'id': 114}
+2026-03-31 13:40:39,878 | auth_service | INFO | [req: 05ddf7c0] REQUEST POST /auth/login
+2026-03-31 13:40:39,879 | auth_service | INFO | [req: 05ddf7c0] PAYLOAD: {'username': 'admin', 'password': 'password123'}
+2026-03-31 13:40:41,916 | auth_service | INFO | [req: 05ddf7c0] RESPONSE POST /auth/login | 200 | 2.037s
+2026-03-31 13:40:41,916 | auth_service | INFO | [req: 05ddf7c0] RESPONSE BODY: {'token': '38d44ff0-0e51-4e02-a94c-0790ffc030fc'}
+2026-03-31 13:43:16,775 | auth_service | INFO | [req: b2f7c00f] REQUEST POST /auth/login
+2026-03-31 13:43:16,775 | auth_service | INFO | [req: b2f7c00f] PAYLOAD: {'username': 'admin', 'password': 'password123'}
+2026-03-31 13:43:18,810 | auth_service | INFO | [req: b2f7c00f] RESPONSE POST /auth/login | 200 | 2.035s
+2026-03-31 13:43:18,810 | auth_service | INFO | [req: b2f7c00f] RESPONSE BODY: {'token': '1b5c0778-7ec2-40c0-b457-f3de7c6974b5'}
+2026-03-31 13:43:31,156 | auth_service | INFO | [req: 79fa78c4] REQUEST POST /auth/login
+2026-03-31 13:43:31,156 | auth_service | INFO | [req: 79fa78c4] PAYLOAD: {'username': 'admin', 'password': 'password123'}
+2026-03-31 13:43:33,202 | auth_service | INFO | [req: 79fa78c4] RESPONSE POST /auth/login | 200 | 2.045s
+2026-03-31 13:43:33,202 | auth_service | INFO | [req: 79fa78c4] RESPONSE BODY: {'token': '599d8143-4a17-4614-9491-95b17fa50ed2'}
+2026-03-31 13:43:33,205 | auth_service | INFO | [req: 3cc2a6e5] REQUEST POST /auth/login
+2026-03-31 13:43:33,205 | auth_service | INFO | [req: 3cc2a6e5] PAYLOAD: {'username': 'admin', 'password': 'password123'}
+2026-03-31 13:43:35,249 | auth_service | INFO | [req: 3cc2a6e5] RESPONSE POST /auth/login | 200 | 2.044s
+2026-03-31 13:43:35,250 | auth_service | INFO | [req: 3cc2a6e5] RESPONSE BODY: {'token': 'df0979b2-89e6-4536-8ec6-5d162d9d8fff'}
+2026-03-31 13:49:18,456 | auth_service | INFO | [req: 404a0586] REQUEST POST /auth/login
+2026-03-31 13:49:18,456 | auth_service | INFO | [req: 404a0586] PAYLOAD: {'username': 'admin', 'password': 'password123'}
+2026-03-31 13:49:20,498 | auth_service | INFO | [req: 404a0586] RESPONSE POST /auth/login | 200 | 2.041s
+2026-03-31 13:49:20,498 | auth_service | INFO | [req: 404a0586] RESPONSE BODY: {'token': '83534188-c9a2-47b0-98bb-57ed137b9ce2'}
+2026-03-31 13:49:20,500 | auth_service | INFO | [req: 8e5f4bef] REQUEST POST /auth/login
+2026-03-31 13:49:20,501 | auth_service | INFO | [req: 8e5f4bef] PAYLOAD: {'username': 'admin', 'password': 'password123'}
+2026-03-31 13:49:22,524 | auth_service | INFO | [req: 8e5f4bef] RESPONSE POST /auth/login | 200 | 2.023s
+2026-03-31 13:49:22,524 | auth_service | INFO | [req: 8e5f4bef] RESPONSE BODY: {'token': '5dff7a74-ef7c-4830-9e74-1f9cada499de'}
+2026-03-31 13:49:22,526 | auth_service | INFO | [req: 304abb67] REQUEST POST /auth/login
+2026-03-31 13:49:22,526 | auth_service | INFO | [req: 304abb67] PAYLOAD: {'username': 'wrong', 'password': 'wrong123'}
+2026-03-31 13:49:24,561 | auth_service | ERROR | [req: 304abb67] RESPONSE POST /auth/login | 401 | 2.034s
+2026-03-31 13:49:24,561 | auth_service | ERROR | [req: 304abb67] RESPONSE BODY: {'detail': 'Invalid login credentials'}
+2026-03-31 13:49:34,584 | auth_service | INFO | [req: 0739a599] REQUEST POST /auth/login
+2026-03-31 13:49:34,584 | auth_service | INFO | [req: 0739a599] PAYLOAD: {'username': 'admin', 'password': 'password123'}
+2026-03-31 13:49:36,614 | auth_service | INFO | [req: 0739a599] RESPONSE POST /auth/login | 200 | 2.030s
+2026-03-31 13:49:36,615 | auth_service | INFO | [req: 0739a599] RESPONSE BODY: {'token': 'd715f51f-b639-468f-b36b-94f2155391bb'}
+2026-03-31 13:49:36,617 | auth_service | INFO | [req: 0a86a5e1] REQUEST POST /auth/login
+2026-03-31 13:49:36,617 | auth_service | INFO | [req: 0a86a5e1] PAYLOAD: {'username': 'admin', 'password': 'password123'}
+2026-03-31 13:49:38,665 | auth_service | INFO | [req: 0a86a5e1] RESPONSE POST /auth/login | 200 | 2.048s
+2026-03-31 13:49:38,665 | auth_service | INFO | [req: 0a86a5e1] RESPONSE BODY: {'token': '6aa5dcb0-f2a4-41a3-9f9e-0496b9a21328'}
+2026-03-31 13:49:38,667 | auth_service | INFO | [req: 33e0aabb] REQUEST POST /auth/login
+2026-03-31 13:49:38,667 | auth_service | INFO | [req: 33e0aabb] PAYLOAD: {'username': 'wrong', 'password': 'wrong123'}
+2026-03-31 13:49:40,699 | auth_service | ERROR | [req: 33e0aabb] RESPONSE POST /auth/login | 401 | 2.031s
+2026-03-31 13:49:40,699 | auth_service | ERROR | [req: 33e0aabb] RESPONSE BODY: {'detail': 'Invalid login credentials'}
+2026-03-31 13:50:51,365 | auth_service | INFO | [req: 1084621a] REQUEST POST /auth/login
+2026-03-31 13:50:51,366 | auth_service | INFO | [req: 1084621a] PAYLOAD: {'username': 'admin', 'password': 'password123'}
+2026-03-31 13:50:53,409 | auth_service | INFO | [req: 1084621a] RESPONSE POST /auth/login | 200 | 2.043s
+2026-03-31 13:50:53,409 | auth_service | INFO | [req: 1084621a] RESPONSE BODY: {'token': '36f775aa-0cec-48ec-ad05-0b9c62b5fdfd'}
+2026-03-31 13:50:53,412 | auth_service | INFO | [req: 4c916a68] REQUEST POST /auth/login
+2026-03-31 13:50:53,412 | auth_service | INFO | [req: 4c916a68] PAYLOAD: {'username': 'admin', 'password': 'password123'}
+2026-03-31 13:50:55,449 | auth_service | INFO | [req: 4c916a68] RESPONSE POST /auth/login | 200 | 2.037s
+2026-03-31 13:50:55,449 | auth_service | INFO | [req: 4c916a68] RESPONSE BODY: {'token': '003c7e36-b26b-40c2-8929-107403658e00'}
+2026-03-31 13:50:55,451 | auth_service | INFO | [req: b36a2131] REQUEST POST /auth/login
+2026-03-31 13:50:55,452 | auth_service | INFO | [req: b36a2131] PAYLOAD: {'username': 'wrong', 'password': 'wrong123'}
+2026-03-31 13:50:57,476 | auth_service | ERROR | [req: b36a2131] RESPONSE POST /auth/login | 401 | 2.025s
+2026-03-31 13:50:57,476 | auth_service | ERROR | [req: b36a2131] RESPONSE BODY: {'detail': 'Invalid login credentials'}
+2026-03-31 13:53:22,839 | auth_service | INFO | [req: 49ac37e2] REQUEST POST /auth/login
+2026-03-31 13:53:22,839 | auth_service | INFO | [req: 49ac37e2] PAYLOAD: {'username': 'admin', 'password': 'password123'}
+2026-03-31 13:53:24,881 | auth_service | INFO | [req: 49ac37e2] RESPONSE POST /auth/login | 200 | 2.041s
+2026-03-31 13:53:24,881 | auth_service | INFO | [req: 49ac37e2] RESPONSE BODY: {'token': '7cb5efae-af41-4e13-ab14-7a9fb8a27d63'}
+2026-03-31 13:53:24,883 | auth_service | INFO | [req: 1feb4de2] REQUEST POST /auth/login
+2026-03-31 13:53:24,883 | auth_service | INFO | [req: 1feb4de2] PAYLOAD: {'username': 'admin', 'password': 'password123'}
+2026-03-31 13:53:26,921 | auth_service | INFO | [req: 1feb4de2] RESPONSE POST /auth/login | 200 | 2.038s
+2026-03-31 13:53:26,921 | auth_service | INFO | [req: 1feb4de2] RESPONSE BODY: {'token': 'ee2f50ae-8ebf-4561-906f-d0e6c12aa5b6'}
+2026-03-31 13:53:26,923 | auth_service | INFO | [req: 7406d698] REQUEST POST /auth/login
+2026-03-31 13:53:26,923 | auth_service | INFO | [req: 7406d698] PAYLOAD: {'username': 'wrong', 'password': 'wrong123'}
+2026-03-31 13:53:28,945 | auth_service | ERROR | [req: 7406d698] RESPONSE POST /auth/login | 401 | 2.021s
+2026-03-31 13:53:28,945 | auth_service | ERROR | [req: 7406d698] RESPONSE BODY: {'detail': 'Invalid login credentials'}
+2026-03-31 13:53:28,947 | auth_service | INFO | [req: aafa2672] REQUEST POST /auth/login
+2026-03-31 13:53:28,947 | auth_service | INFO | [req: aafa2672] PAYLOAD: {'username': 21, 'password': False}
+2026-03-31 13:53:30,979 | auth_service | ERROR | [req: aafa2672] RESPONSE POST /auth/login | 422 | 2.032s
+2026-03-31 13:53:30,979 | auth_service | ERROR | [req: aafa2672] RESPONSE BODY: {'detail': [{'type': 'string_type', 'loc': ['body', 'username'], 'msg': 'Input should be a valid string', 'input': 21}, {'type': 'string_type', 'loc': ['body', 'password'], 'msg': 'Input should be a valid string', 'input': False}]}
+2026-03-31 13:58:31,558 | auth_service | INFO | [req: 3bd9d1df] REQUEST POST /auth/login
+2026-03-31 13:58:31,559 | auth_service | INFO | [req: 3bd9d1df] PAYLOAD: {'username': 'admin', 'password': 'password123'}
+2026-03-31 13:58:33,589 | auth_service | INFO | [req: 3bd9d1df] RESPONSE POST /auth/login | 200 | 2.030s
+2026-03-31 13:58:33,589 | auth_service | INFO | [req: 3bd9d1df] RESPONSE BODY: {'token': '1b25cec4-f9bf-4a17-ad24-1326adcbaa24'}
+2026-03-31 13:58:33,591 | auth_service | INFO | [req: d87d09a1] REQUEST POST /auth/login
+2026-03-31 13:58:33,591 | auth_service | INFO | [req: d87d09a1] PAYLOAD: {'username': 'admin', 'password': 'password123'}
+2026-03-31 13:58:35,627 | auth_service | INFO | [req: d87d09a1] RESPONSE POST /auth/login | 200 | 2.036s
+2026-03-31 13:58:35,628 | auth_service | INFO | [req: d87d09a1] RESPONSE BODY: {'token': '10b9cc84-638b-4686-a8fc-890e781a8645'}
+2026-03-31 13:58:35,630 | auth_service | INFO | [req: f107b55a] REQUEST POST /auth/login
+2026-03-31 13:58:35,630 | auth_service | INFO | [req: f107b55a] PAYLOAD: {'username': 'wrong', 'password': 'wrong123'}
+2026-03-31 13:58:37,657 | auth_service | ERROR | [req: f107b55a] RESPONSE POST /auth/login | 401 | 2.027s
+2026-03-31 13:58:37,657 | auth_service | ERROR | [req: f107b55a] RESPONSE BODY: {'detail': 'Invalid login credentials'}
+2026-03-31 13:58:37,659 | auth_service | INFO | [req: 634d5759] REQUEST POST /auth/login
+2026-03-31 13:58:37,660 | auth_service | INFO | [req: 634d5759] PAYLOAD: {'username': 21, 'password': False}
+2026-03-31 13:58:39,701 | auth_service | ERROR | [req: 634d5759] RESPONSE POST /auth/login | 422 | 2.042s
+2026-03-31 13:58:39,702 | auth_service | ERROR | [req: 634d5759] RESPONSE BODY: {'detail': [{'type': 'string_type', 'loc': ['body', 'username'], 'msg': 'Input should be a valid string', 'input': 21}, {'type': 'string_type', 'loc': ['body', 'password'], 'msg': 'Input should be a valid string', 'input': False}]}
+2026-03-31 13:59:18,683 | auth_service | INFO | [req: aec89586] REQUEST POST /auth/login
+2026-03-31 13:59:18,683 | auth_service | INFO | [req: aec89586] PAYLOAD: {'username': 'admin', 'password': 'password123'}
+2026-03-31 13:59:20,718 | auth_service | INFO | [req: aec89586] RESPONSE POST /auth/login | 200 | 2.035s
+2026-03-31 13:59:20,718 | auth_service | INFO | [req: aec89586] RESPONSE BODY: {'token': '7295bda0-0540-4ec7-ab31-beeff79322d1'}
+2026-03-31 13:59:20,721 | auth_service | INFO | [req: 65024484] REQUEST POST /auth/login
+2026-03-31 13:59:20,721 | auth_service | INFO | [req: 65024484] PAYLOAD: {'username': 'admin', 'password': 'password123'}
+2026-03-31 13:59:22,758 | auth_service | INFO | [req: 65024484] RESPONSE POST /auth/login | 200 | 2.037s
+2026-03-31 13:59:22,758 | auth_service | INFO | [req: 65024484] RESPONSE BODY: {'token': 'ba9e3ae7-2708-48d8-8e6b-e811d42d448f'}
+2026-03-31 13:59:22,760 | auth_service | INFO | [req: 97c62ded] REQUEST POST /auth/login
+2026-03-31 13:59:22,760 | auth_service | INFO | [req: 97c62ded] PAYLOAD: {'username': 'wrong', 'password': 'wrong123'}
+2026-03-31 13:59:24,786 | auth_service | ERROR | [req: 97c62ded] RESPONSE POST /auth/login | 401 | 2.026s
+2026-03-31 13:59:24,786 | auth_service | ERROR | [req: 97c62ded] RESPONSE BODY: {'detail': 'Invalid login credentials'}
+2026-03-31 13:59:24,789 | auth_service | INFO | [req: 9f6c04d0] REQUEST POST /auth/login
+2026-03-31 13:59:24,789 | auth_service | INFO | [req: 9f6c04d0] PAYLOAD: {'username': 21, 'password': False}
+2026-03-31 13:59:26,824 | auth_service | ERROR | [req: 9f6c04d0] RESPONSE POST /auth/login | 422 | 2.036s
+2026-03-31 13:59:26,825 | auth_service | ERROR | [req: 9f6c04d0] RESPONSE BODY: {'detail': [{'type': 'string_type', 'loc': ['body', 'username'], 'msg': 'Input should be a valid string', 'input': 21}, {'type': 'string_type', 'loc': ['body', 'password'], 'msg': 'Input should be a valid string', 'input': False}]}

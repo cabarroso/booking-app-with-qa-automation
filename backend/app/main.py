@@ -1,10 +1,23 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from app.database import Base, engine
 from app.routes import booking_routes, auth_routes
 
 from app.models.booking import Booking
 
 app = FastAPI()
+
+origins = [
+    "http://localhost:5173" # front end app
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],  # allows OPTIONS, POST, etc.
+    allow_headers=["*"],
+)
 
 # create tables
 Base.metadata.create_all(bind=engine)

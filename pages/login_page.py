@@ -5,9 +5,15 @@ class LoginPage():
 
     def __init__(self, page: Page):
         self.page = page
+        self.base_url = "http://localhost:5173/login"
+    
+    @property
+    def current_url(self) -> str:
+        return self.page.url
 
-    def open(self):
-        self.page.goto("http://localhost:5173/login")
+    @property
+    def heading_locator(self) -> Locator:
+        return self.page.get_by_role("heading", name="Login")
 
     @property
     def username_input_locator(self) -> Locator:
@@ -15,11 +21,22 @@ class LoginPage():
     
     @property
     def password_input_locator(self) -> Locator:
-        pass
+        return self.page.locator("#password")
 
     @property
-    def login_button_locator(self):
+    def login_button_locator(self) -> Locator:
         return self.page.get_by_role("button", name="Login")
+    
+    @property
+    def error_message_locator(self) -> Locator:
+        return self.page.locator(".error-message")
+    
+    @property
+    def at_login_page(self) -> bool:
+        return self.current_url == self.base_url
+    
+    def open(self):
+        self.page.goto("http://localhost:5173/login")
     
     def fill_username(self, username):
         self.username_input_locator.fill(username)
@@ -34,3 +51,5 @@ class LoginPage():
         self.fill_username(username)
         self.fill_password(password)
         self.submit()
+
+    

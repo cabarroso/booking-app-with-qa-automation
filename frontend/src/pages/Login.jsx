@@ -36,6 +36,7 @@ function Login() {
             />
 
             <input
+              id="password"
               type="password"
               placeholder="Password"
               value={password}
@@ -44,7 +45,7 @@ function Login() {
 
             <button onClick={handleLogin}>Login</button>
 
-            {error && <p>{error}</p>}
+            {error && <p className="error-message">{error}</p>}
         </div>
     );
 }

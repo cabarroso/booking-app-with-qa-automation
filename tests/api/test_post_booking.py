@@ -4,7 +4,7 @@ from framework.utils.data_generator import generate_booking_data
 import pytest
 
 @pytest.mark.post_booking
-def test_create_booking(booking_service, booking_data):
+def test_post_booking(booking_service, booking_data):
     response = booking_service.create_booking(booking_data)
 
     # status code

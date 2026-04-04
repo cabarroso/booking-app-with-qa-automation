@@ -63,16 +63,22 @@ function BookingForm() {
     return(<div>
             <h2>Create Booking</h2>
             <form onSubmit={handleSubmit}>
-                <input name="firstname" onChange={handleChange} />
-                <input name="lastname" onChange={handleChange} />
-                <input name="totalprice" type="number" onChange={handleChange} />
+                <label for="firstname">First Name</label>
+                <input id="firstname" name="firstname" onChange={handleChange} />
+                <label for="lastname">Last Name</label>
+                <input id="lastname" name="lastname" onChange={handleChange} />
+                <label for="totalprice">Total Price</label>
+                <input id="totalprice" name="totalprice" type="number" onChange={handleChange} />
                 <label>
                     Deposit Paid
-                    <input name="depositpaid" type="checkbox" onChange={handleChange} />
+                    <input id="depositpaid" name="depositpaid" type="checkbox" onChange={handleChange} />
                 </label>
-                <input name="checkin" type="date" onChange={handleChange} />
-                <input name="checkout" type="date" onChange={handleChange} />
-                <input name="additionalneeds" onChange={handleChange} />
+                <label for="checkin">Check In</label>
+                <input id="checkin" name="checkin" type="date" onChange={handleChange} />
+                <label for="checkout">Check Out</label>
+                <input id="checkout" name="checkout" type="date" onChange={handleChange} />
+                <label for="additionalneeds">Additional Needs</label>
+                <input id="additionalneeds" name="additionalneeds" onChange={handleChange} />
 
                 <button type="submit" data-testid="submit-booking" disabled={loading}>
                     {loading ? "Creating..." : "Create Booking"}

@@ -36,7 +36,7 @@ class LoginPage():
         return self.current_url == self.base_url
     
     def open(self):
-        self.page.goto("http://localhost:5173/login")
+        self.page.goto(self.base_url)
     
     def fill_username(self, username):
         self.username_input_locator.fill(username)

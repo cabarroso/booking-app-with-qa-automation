@@ -55,15 +55,15 @@ function BookingList() {
                 </thead>
                 <tbody>
                     {BookingList.map(b => (
-                        <tr key={b.id} data-testid={`booking-row-${b.id}`}>
+                        <tr className="booking" key={b.id} data-testid={`booking-row-${b.id}`}>
                             <td>{b.id}</td>
-                            <td>{b.first_name}</td>
-                            <td>{b.last_name}</td>
-                            <td>{b.total_price}</td>
-                            <td>{b.deposit_paid.toString()}</td>
-                            <td>{b.check_in}</td>
-                            <td>{b.check_out}</td>
-                            <td>{b.additional_needs}</td>
+                            <td className="first-name">{b.first_name}</td>
+                            <td className="last-name">{b.last_name}</td>
+                            <td className="total-price">{b.total_price}</td>
+                            <td className="deposit-paid">{b.deposit_paid.toString()}</td>
+                            <td className="check-in">{b.check_in}</td>
+                            <td className="check-out">{b.check_out}</td>
+                            <td className="additional-needs">{b.additional_needs}</td>
                             <td>
                                 <button onClick={() => deleteBooking(b.id)}>
                                     Delete

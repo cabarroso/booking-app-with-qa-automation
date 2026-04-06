@@ -43,6 +43,9 @@ class BookingsPage():
     
     def open(self):
         self.page.goto(self.base_url)
+    
+    def reload(self):
+        self.page.reload()
 
     def get_last_booking_id(self) -> int:
         return int(self.last_booking_id_locator.inner_text())

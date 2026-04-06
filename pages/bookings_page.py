@@ -21,6 +21,10 @@ class BookingsPage():
     def last_booking_row_locator(self) -> Locator:
         return self.booking_row_locator.last
     
+    @property 
+    def last_booking_id_locator(self) -> Locator:
+        return self.last_booking_row_locator.locator(".booking-id")
+    
     @property
     def last_booking_first_name_locator(self) -> Locator:
         return self.last_booking_row_locator.locator(".first-name")
@@ -33,8 +37,15 @@ class BookingsPage():
     def last_booking_total_price_locator(self) -> Locator:
         return self.last_booking_row_locator.locator(".total-price")
     
+    @property
+    def last_booking_delete_button_locator(self) -> Locator:
+        return self.last_booking_row_locator.get_by_role("button", name="Delete")
+    
     def open(self):
         self.page.goto(self.base_url)
+
+    def get_last_booking_id(self) -> int:
+        return int(self.last_booking_id_locator.inner_text())
 
     def get_last_booking_first_name(self) -> str:
         return self.last_booking_first_name_locator.inner_text()
@@ -44,4 +55,7 @@ class BookingsPage():
     
     def get_last_booking_total_price(self) -> int:
         return int(self.last_booking_total_price_locator.inner_text())
+    
+    def delete_last_booking(self):
+        self.last_booking_delete_button_locator.click()
         

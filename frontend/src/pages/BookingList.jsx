@@ -56,7 +56,7 @@ function BookingList() {
                 <tbody>
                     {BookingList.map(b => (
                         <tr className="booking" key={b.id} data-testid={`booking-row-${b.id}`}>
-                            <td>{b.id}</td>
+                            <td className="booking-id">{b.id}</td>
                             <td className="first-name">{b.first_name}</td>
                             <td className="last-name">{b.last_name}</td>
                             <td className="total-price">{b.total_price}</td>

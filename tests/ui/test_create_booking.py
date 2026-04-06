@@ -31,6 +31,6 @@ def test_create_booking(create_booking_page, booking_data):
 # @pytest.mark.ui
 # @pytest.mark.create_booking
 # def test_create_booking_invalid_input(create_booking_page, booking_data):
-#     booking_data["first_name"]
+#     pass
 
 

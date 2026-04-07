@@ -4,5 +4,6 @@ setup_logger()
 
 pytest_plugins = [
                     "framework.fixtures.api_fixtures",
-                    "framework.fixtures.ui_fixtures"
+                    "framework.fixtures.ui_fixtures",
+                    "framework.fixtures.utility_fixtures"
                  ]

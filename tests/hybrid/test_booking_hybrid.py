@@ -1,14 +1,26 @@
 import pytest
+import json
+from jsonschema import validate, ValidationError
 
 @pytest.mark.hybrid
 @pytest.mark.booking
-def test_create_booking_via_api(booking_service, booking_data, bookings_page):
+@pytest.mark.create
+def test_create_booking_via_api(booking_service, booking_data, bookings_page, booking_schema):
+
     # Create booking via API
     response = booking_service.create_booking(booking_data)
 
     assert response.status_code == 201
 
     new_booking = response.json()
+
+    del new_booking["first_name"]
+
+    # validate schema
+    try:
+        validate(instance=new_booking, schema=booking_schema)
+    except ValidationError as e:
+        pytest.fail(f"JSON Schema validaiton failed: {e.message}")
 
     # Open UI
     bookings_page.reload()
@@ -28,7 +40,7 @@ def test_delete_booking_via_api(booking_service, bookings_page):
     last_booking_id = bookings_page.get_last_booking_id()
 
     # Delete via API
-    response = booking_service.delete_booking(last_booking_id)
+    booking_service.delete_booking(last_booking_id)
 
     bookings_page.reload()
 

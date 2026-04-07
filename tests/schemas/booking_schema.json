@@ -1,0 +1,22 @@
+{
+    "type": "object",
+    "properties": {
+        "first_name": {"type": "string"},
+        "last_name": {"type": "string"},
+        "total_price": {"type": "number"},
+        "deposit_paid": {"type": "boolean"},
+        "check_in": {"type": "string"},
+        "check_out": {"type": "string"},
+        "additional_needs": {"type": "string"},
+        "id": {"type": "number"}
+    },
+    "required": [
+        "id", 
+        "first_name", 
+        "last_name", 
+        "total_price",
+        "deposit_paid",
+        "check_in",
+        "check_out"
+    ]
+}

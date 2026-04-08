@@ -7,9 +7,11 @@ def test_update_booking_status(booking_service, booking_data, last_booking_id):
     assert response.status_code == 200
 
 @pytest.mark.put_booking
-def test_update_booking(booking_service, booking_data, last_booking_id):
+def test_update_booking(booking_service, booking_data, last_booking_id, validate_booking):
     response = booking_service.update_booking(last_booking_id, booking_data)
     updated_booking = response.json()
+
+    validate_booking(updated_booking)
 
     assert updated_booking["id"] == last_booking_id
     assert updated_booking["first_name"] == booking_data["first_name"]

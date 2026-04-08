@@ -3,14 +3,22 @@ from framework.utils.data_generator import generate_booking_data
 
 import pytest
 
+@pytest.mark.smoke
 @pytest.mark.post_booking
-def test_post_booking(booking_service, booking_data):
+def test_post_booking_status(booking_service, booking_data):
     response = booking_service.create_booking(booking_data)
 
     # status code
     assert response.status_code == 201
 
+@pytest.mark.post_booking
+def test_post_booking(booking_service, booking_data, validate_booking):
+    response = booking_service.create_booking(booking_data)
+
     response_data = response.json()
+
+    # validate bookings against schema
+    validate_booking(response_data)
 
     # id exists
     assert "id" in response_data

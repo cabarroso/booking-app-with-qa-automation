@@ -22,20 +22,84 @@ function BookingForm() {
         checkout: "",
         additionalneeds: ""
     });
-    const [error, setError] = useState(null);
+    const [errors, setErrors] = useState({});
+    const [apiError, setApiError] = useState(null)
     const [loading, setLoading] = useState(false);
 
-    const handleChange = (e) => {
+    // Field level validation
+    const validateField = (name, value) => {
+        let error = "";
+
+        if (name === "firstname" && !value.trim()) {
+            error = "First name is required";
+        }
+
+        if (name === "lastname" && !value.trim()) {
+            error = "Last name is required";
+        }
+
+        if (name === "totalprice") {
+            if (value === "") error = "Price is required";
+            else if (isNaN(value)) error = "Must be a number";
+            else if (Number(value) < 0) error = "Cannot be negative";
+        }
+
+        if (name === "checkin" && !value) {
+            error = "Check-in date required";
+        }
+
+        if (name === "checkout" && !value) {
+            error = "Check-out date required";
+        }
+
+        return error
+    };
+
+    // Form-level validation (cross-field logic)
+    const validateForm = () => {
+        let newErrors = {};
+
+        Object.keys(form).forEach(key => {
+            const error = validateField(key, form[key]);
+            if (error) newErrors[key] = error
+        });
+
+        // Cross-field validation
+        if (form.checkin && form.checkout) {
+            if (new Date(form.checkout) < new Date(form.checkin)) {
+                newErrors.checkout = "Checkout cannot be before check-in";
+            }
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const handleChange = e => {
         const { name, value, type, checked } = e.target;
+
+        const newValue = type === "checkbox" ? checked : value
 
         setForm({
             ...form,
-            [name]: type === "checkbox" ? checked : value
+            [name]: newValue
+        });
+
+        // Validate on change (instant feedback)
+        const error = validateField(name, newValue);
+
+        setErrors({
+            ...errors,
+            [name]: error
         });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Block submission if invalid
+        if (!validateForm()) return;
+
         setLoading(true);
 
         const payload = {
@@ -50,11 +114,11 @@ function BookingForm() {
 
         try {
             await API.post("/bookings", payload);
-            setError(null)
+            setApiError(null)
             alert("Booking created!");
             navigate("/bookings")
         } catch (err) {
-            setError(err.response?.data?.message || "unknown error");
+            setApiError(err.response?.data?.message || "Unknown error");
         } finally {
             setLoading(false);
         }
@@ -63,20 +127,32 @@ function BookingForm() {
     return(<div>
             <h2>Create Booking</h2>
             <form onSubmit={handleSubmit}>
+
                 <label for="firstname">First Name</label>
                 <input id="firstname" name="firstname" onChange={handleChange} />
+                {errors.firstname && <p>{errors.firstname}</p>}
+
                 <label for="lastname">Last Name</label>
                 <input id="lastname" name="lastname" onChange={handleChange} />
+                {errors.lastname && <p>{errors.lastname}</p>}
+
                 <label for="totalprice">Total Price</label>
                 <input id="totalprice" name="totalprice" type="number" onChange={handleChange} />
+                {errors.totalprice && <p>{errors.totalprice}</p>}
+
                 <label>
                     Deposit Paid
                     <input id="depositpaid" name="depositpaid" type="checkbox" onChange={handleChange} />
                 </label>
+
                 <label for="checkin">Check In</label>
                 <input id="checkin" name="checkin" type="date" onChange={handleChange} />
+                {errors.checkin && <p>{errors.checkin}</p>}
+
                 <label for="checkout">Check Out</label>
                 <input id="checkout" name="checkout" type="date" onChange={handleChange} />
+                {errors.checkout && <p>{errors.checkout}</p>}
+
                 <label for="additionalneeds">Additional Needs</label>
                 <input id="additionalneeds" name="additionalneeds" onChange={handleChange} />
 
@@ -84,7 +160,7 @@ function BookingForm() {
                     {loading ? "Creating..." : "Create Booking"}
                 </button>
             </form>
-            {error && <p data-testid="error-message">{error}</p>}
+            {apiError && <p data-testid="error-message">{apiError}</p>}
         </div>
     );
 }

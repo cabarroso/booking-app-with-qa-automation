@@ -342,3 +342,109 @@
 2026-04-07 13:24:46,836 | booking_service | INFO | [req: 44ce0fcb] PAYLOAD: {'first_name': 'Julie', 'last_name': 'Hill', 'total_price': 188, 'deposit_paid': True, 'check_in': '2026-04-30', 'check_out': '2026-04-30', 'additional_needs': 'recent'}
 2026-04-07 13:24:48,892 | booking_service | INFO | [req: 44ce0fcb] RESPONSE POST /bookings | 201 | 2.056s
 2026-04-07 13:24:48,892 | booking_service | INFO | [req: 44ce0fcb] RESPONSE BODY: {'first_name': 'Julie', 'last_name': 'Hill', 'total_price': 188, 'deposit_paid': True, 'check_in': '2026-04-30', 'check_out': '2026-04-30', 'additional_needs': 'recent', 'id': 132}
+2026-04-07 13:31:12,075 | booking_service | INFO | [req: 14d162a9] REQUEST POST /bookings
+2026-04-07 13:31:12,075 | booking_service | INFO | [req: 14d162a9] PAYLOAD: {'first_name': 'Kenneth', 'last_name': 'Chandler', 'total_price': 125, 'deposit_paid': False, 'check_in': '2026-04-12', 'check_out': '2026-05-08', 'additional_needs': 'television'}
+2026-04-07 13:31:14,134 | booking_service | INFO | [req: 14d162a9] RESPONSE POST /bookings | 201 | 2.059s
+2026-04-07 13:31:14,134 | booking_service | INFO | [req: 14d162a9] RESPONSE BODY: {'first_name': 'Kenneth', 'last_name': 'Chandler', 'total_price': 125, 'deposit_paid': False, 'check_in': '2026-04-12', 'check_out': '2026-05-08', 'additional_needs': 'television', 'id': 133}
+2026-04-07 13:31:14,138 | booking_service | INFO | [req: a884c69c] REQUEST POST /bookings
+2026-04-07 13:31:14,139 | booking_service | INFO | [req: a884c69c] PAYLOAD: {'first_name': 'Kristin', 'last_name': 'Oneal', 'total_price': 401, 'deposit_paid': False, 'check_in': '2026-04-13', 'check_out': '2026-05-25', 'additional_needs': 'story'}
+2026-04-07 13:31:16,186 | booking_service | INFO | [req: a884c69c] RESPONSE POST /bookings | 201 | 2.047s
+2026-04-07 13:31:16,186 | booking_service | INFO | [req: a884c69c] RESPONSE BODY: {'first_name': 'Kristin', 'last_name': 'Oneal', 'total_price': 401, 'deposit_paid': False, 'check_in': '2026-04-13', 'check_out': '2026-05-25', 'additional_needs': 'story', 'id': 134}
+2026-04-07 13:31:16,192 | booking_service | INFO | [req: 42a59efb] REQUEST POST /bookings
+2026-04-07 13:31:16,192 | booking_service | INFO | [req: 42a59efb] PAYLOAD: {'last_name': 'Blake', 'total_price': 283, 'deposit_paid': False, 'check_in': '2026-04-29', 'check_out': '2026-05-11', 'additional_needs': 'hotel'}
+2026-04-07 13:31:18,199 | booking_service | ERROR | [req: 42a59efb] RESPONSE POST /bookings | 422 | 2.007s
+2026-04-07 13:31:18,199 | booking_service | ERROR | [req: 42a59efb] RESPONSE BODY: {'detail': [{'type': 'missing', 'loc': ['body', 'first_name'], 'msg': 'Field required', 'input': {'last_name': 'Blake', 'total_price': 283, 'deposit_paid': False, 'check_in': '2026-04-29', 'check_out': '2026-05-11', 'additional_needs': 'hotel'}}]}
+2026-04-07 13:31:18,202 | booking_service | INFO | [req: 1e94494e] REQUEST POST /bookings
+2026-04-07 13:31:18,202 | booking_service | INFO | [req: 1e94494e] PAYLOAD: {'first_name': 'David', 'last_name': 'Melendez', 'deposit_paid': True, 'check_in': '2026-05-05', 'check_out': '2026-06-03', 'additional_needs': 'back'}
+2026-04-07 13:31:20,232 | booking_service | ERROR | [req: 1e94494e] RESPONSE POST /bookings | 422 | 2.030s
+2026-04-07 13:31:20,232 | booking_service | ERROR | [req: 1e94494e] RESPONSE BODY: {'detail': [{'type': 'missing', 'loc': ['body', 'total_price'], 'msg': 'Field required', 'input': {'first_name': 'David', 'last_name': 'Melendez', 'deposit_paid': True, 'check_in': '2026-05-05', 'check_out': '2026-06-03', 'additional_needs': 'back'}}]}
+2026-04-07 13:31:20,234 | booking_service | INFO | [req: 6ee8c9a1] REQUEST POST /bookings
+2026-04-07 13:31:20,235 | booking_service | INFO | [req: 6ee8c9a1] PAYLOAD: {'first_name': 'Joshua', 'last_name': 'Cox', 'total_price': 392, 'deposit_paid': True, 'check_out': '2026-04-29', 'additional_needs': 'ask'}
+2026-04-07 13:31:22,269 | booking_service | ERROR | [req: 6ee8c9a1] RESPONSE POST /bookings | 422 | 2.034s
+2026-04-07 13:31:22,269 | booking_service | ERROR | [req: 6ee8c9a1] RESPONSE BODY: {'detail': [{'type': 'missing', 'loc': ['body', 'check_in'], 'msg': 'Field required', 'input': {'first_name': 'Joshua', 'last_name': 'Cox', 'total_price': 392, 'deposit_paid': True, 'check_out': '2026-04-29', 'additional_needs': 'ask'}}]}
+2026-04-07 13:31:22,272 | booking_service | INFO | [req: be6ec08a] REQUEST POST /bookings
+2026-04-07 13:31:22,272 | booking_service | INFO | [req: be6ec08a] PAYLOAD: {'first_name': 1337, 'last_name': 'Nguyen', 'total_price': 449, 'deposit_paid': False, 'check_in': '2026-04-07', 'check_out': '2026-05-28', 'additional_needs': 'case'}
+2026-04-07 13:31:24,303 | booking_service | ERROR | [req: be6ec08a] RESPONSE POST /bookings | 422 | 2.031s
+2026-04-07 13:31:24,303 | booking_service | ERROR | [req: be6ec08a] RESPONSE BODY: {'detail': [{'type': 'string_type', 'loc': ['body', 'first_name'], 'msg': 'Input should be a valid string', 'input': 1337}]}
+2026-04-07 13:31:24,306 | booking_service | INFO | [req: e8dec5e7] REQUEST POST /bookings
+2026-04-07 13:31:24,306 | booking_service | INFO | [req: e8dec5e7] PAYLOAD: {'first_name': 'Christopher', 'last_name': 'Keller', 'total_price': 'fifty', 'deposit_paid': False, 'check_in': '2026-04-14', 'check_out': '2026-05-31', 'additional_needs': 'hot'}
+2026-04-07 13:31:26,329 | booking_service | ERROR | [req: e8dec5e7] RESPONSE POST /bookings | 422 | 2.023s
+2026-04-07 13:31:26,329 | booking_service | ERROR | [req: e8dec5e7] RESPONSE BODY: {'detail': [{'type': 'int_parsing', 'loc': ['body', 'total_price'], 'msg': 'Input should be a valid integer, unable to parse string as an integer', 'input': 'fifty'}]}
+2026-04-07 13:31:26,332 | booking_service | INFO | [req: 0be9bcfe] REQUEST POST /bookings
+2026-04-07 13:31:26,332 | booking_service | INFO | [req: 0be9bcfe] PAYLOAD: {'first_name': 'Tiffany', 'last_name': 'Alexander', 'total_price': 285, 'deposit_paid': False, 'check_in': 3.14, 'check_out': '2026-05-23', 'additional_needs': 'audience'}
+2026-04-07 13:31:28,380 | booking_service | ERROR | [req: 0be9bcfe] RESPONSE POST /bookings | 422 | 2.048s
+2026-04-07 13:31:28,380 | booking_service | ERROR | [req: 0be9bcfe] RESPONSE BODY: {'detail': [{'type': 'string_type', 'loc': ['body', 'check_in'], 'msg': 'Input should be a valid string', 'input': 3.14}]}
+2026-04-07 13:31:28,382 | booking_service | INFO | [req: 09f464c1] REQUEST POST /bookings
+2026-04-07 13:31:28,382 | booking_service | INFO | [req: 09f464c1] PAYLOAD: {'first_name': 'Carla', 'last_name': 'Moss', 'total_price': 454, 'deposit_paid': 'notabool', 'check_in': '2026-05-04', 'check_out': '2026-05-30', 'additional_needs': 'toward'}
+2026-04-07 13:31:30,421 | booking_service | ERROR | [req: 09f464c1] RESPONSE POST /bookings | 422 | 2.039s
+2026-04-07 13:31:30,421 | booking_service | ERROR | [req: 09f464c1] RESPONSE BODY: {'detail': [{'type': 'bool_parsing', 'loc': ['body', 'deposit_paid'], 'msg': 'Input should be a valid boolean, unable to interpret input', 'input': 'notabool'}]}
+2026-04-07 13:32:46,300 | booking_service | INFO | [req: 388f4849] REQUEST GET /bookings
+2026-04-07 13:32:48,353 | booking_service | INFO | [req: 388f4849] RESPONSE GET /bookings | 200 | 2.052s
+2026-04-07 13:32:48,353 | booking_service | INFO | [req: 388f4849] RESPONSE BODY: [{'first_name': 'Sonya', 'last_name': 'Garcia', 'total_price': 215, 'deposit_paid': False, 'check_in': '2026-04-16', 'check_out': '2026-04-20', 'additional_needs': 'itself', 'id': 5}, {'first_name': 'Kathleen', 'last_name': 'Morton', 'total_price': 106, 'deposit_paid': True, 'check_in': '2026-04-08', 'check_out': '2026-04-10', 'additional_needs': 'bit', 'id': 6}, {'first_name': 'Kayla', 'last_name': 'Davis', 'total_price': 308, 'deposit_paid': True, 'check_in': '2026-04-10', 'check_out': '2026-0
+2026-04-07 13:32:48,354 | booking_service | INFO | [req: 31f269fb] REQUEST PUT /bookings/134
+2026-04-07 13:32:48,354 | booking_service | INFO | [req: 31f269fb] PAYLOAD: {'first_name': 'Matthew', 'last_name': 'Roberts', 'total_price': 95, 'deposit_paid': False, 'check_in': '2026-04-24', 'check_out': '2026-05-28', 'additional_needs': 'matter'}
+2026-04-07 13:32:50,400 | booking_service | INFO | [req: 31f269fb] RESPONSE PUT /bookings/134 | 200 | 2.046s
+2026-04-07 13:32:50,400 | booking_service | INFO | [req: 31f269fb] RESPONSE BODY: {'first_name': 'Matthew', 'last_name': 'Roberts', 'total_price': 95, 'deposit_paid': False, 'check_in': '2026-04-24', 'check_out': '2026-05-28', 'additional_needs': 'matter', 'id': 134}
+2026-04-07 13:32:50,403 | booking_service | INFO | [req: 65a16ed9] REQUEST GET /bookings
+2026-04-07 13:32:52,439 | booking_service | INFO | [req: 65a16ed9] RESPONSE GET /bookings | 200 | 2.036s
+2026-04-07 13:32:52,440 | booking_service | INFO | [req: 65a16ed9] RESPONSE BODY: [{'first_name': 'Sonya', 'last_name': 'Garcia', 'total_price': 215, 'deposit_paid': False, 'check_in': '2026-04-16', 'check_out': '2026-04-20', 'additional_needs': 'itself', 'id': 5}, {'first_name': 'Kathleen', 'last_name': 'Morton', 'total_price': 106, 'deposit_paid': True, 'check_in': '2026-04-08', 'check_out': '2026-04-10', 'additional_needs': 'bit', 'id': 6}, {'first_name': 'Kayla', 'last_name': 'Davis', 'total_price': 308, 'deposit_paid': True, 'check_in': '2026-04-10', 'check_out': '2026-0
+2026-04-07 13:32:52,440 | booking_service | INFO | [req: e984c7f2] REQUEST PUT /bookings/134
+2026-04-07 13:32:52,440 | booking_service | INFO | [req: e984c7f2] PAYLOAD: {'first_name': 'Jessica', 'last_name': 'Wallace', 'total_price': 278, 'deposit_paid': True, 'check_in': '2026-04-25', 'check_out': '2026-05-09', 'additional_needs': 'physical'}
+2026-04-07 13:32:54,484 | booking_service | INFO | [req: e984c7f2] RESPONSE PUT /bookings/134 | 200 | 2.043s
+2026-04-07 13:32:54,484 | booking_service | INFO | [req: e984c7f2] RESPONSE BODY: {'first_name': 'Jessica', 'last_name': 'Wallace', 'total_price': 278, 'deposit_paid': True, 'check_in': '2026-04-25', 'check_out': '2026-05-09', 'additional_needs': 'physical', 'id': 134}
+2026-04-07 13:32:54,492 | booking_service | INFO | [req: 9baa6918] REQUEST GET /bookings
+2026-04-07 13:32:56,519 | booking_service | INFO | [req: 9baa6918] RESPONSE GET /bookings | 200 | 2.027s
+2026-04-07 13:32:56,519 | booking_service | INFO | [req: 9baa6918] RESPONSE BODY: [{'first_name': 'Sonya', 'last_name': 'Garcia', 'total_price': 215, 'deposit_paid': False, 'check_in': '2026-04-16', 'check_out': '2026-04-20', 'additional_needs': 'itself', 'id': 5}, {'first_name': 'Kathleen', 'last_name': 'Morton', 'total_price': 106, 'deposit_paid': True, 'check_in': '2026-04-08', 'check_out': '2026-04-10', 'additional_needs': 'bit', 'id': 6}, {'first_name': 'Kayla', 'last_name': 'Davis', 'total_price': 308, 'deposit_paid': True, 'check_in': '2026-04-10', 'check_out': '2026-0
+2026-04-07 13:32:56,521 | booking_service | INFO | [req: d9a27020] REQUEST PUT /bookings/135
+2026-04-07 13:32:56,521 | booking_service | INFO | [req: d9a27020] PAYLOAD: {'first_name': 'Ronald', 'last_name': 'Medina', 'total_price': 125, 'deposit_paid': True, 'check_in': '2026-04-25', 'check_out': '2026-06-05', 'additional_needs': 'night'}
+2026-04-07 13:32:58,563 | booking_service | ERROR | [req: d9a27020] RESPONSE PUT /bookings/135 | 404 | 2.042s
+2026-04-07 13:32:58,563 | booking_service | ERROR | [req: d9a27020] RESPONSE BODY: {'detail': 'Booking not found'}
+2026-04-07 13:32:58,566 | booking_service | INFO | [req: 10d613f8] REQUEST GET /bookings
+2026-04-07 13:33:00,594 | booking_service | INFO | [req: 10d613f8] RESPONSE GET /bookings | 200 | 2.028s
+2026-04-07 13:33:00,594 | booking_service | INFO | [req: 10d613f8] RESPONSE BODY: [{'first_name': 'Sonya', 'last_name': 'Garcia', 'total_price': 215, 'deposit_paid': False, 'check_in': '2026-04-16', 'check_out': '2026-04-20', 'additional_needs': 'itself', 'id': 5}, {'first_name': 'Kathleen', 'last_name': 'Morton', 'total_price': 106, 'deposit_paid': True, 'check_in': '2026-04-08', 'check_out': '2026-04-10', 'additional_needs': 'bit', 'id': 6}, {'first_name': 'Kayla', 'last_name': 'Davis', 'total_price': 308, 'deposit_paid': True, 'check_in': '2026-04-10', 'check_out': '2026-0
+2026-04-07 13:33:00,595 | booking_service | INFO | [req: ee307f42] REQUEST PUT /bookings/134
+2026-04-07 13:33:00,595 | booking_service | INFO | [req: ee307f42] PAYLOAD: {'last_name': 'Pena', 'total_price': 131, 'deposit_paid': True, 'check_in': '2026-04-13', 'check_out': '2026-05-26', 'additional_needs': 'majority'}
+2026-04-07 13:33:02,610 | booking_service | ERROR | [req: ee307f42] RESPONSE PUT /bookings/134 | 422 | 2.014s
+2026-04-07 13:33:02,610 | booking_service | ERROR | [req: ee307f42] RESPONSE BODY: {'detail': [{'type': 'missing', 'loc': ['body', 'first_name'], 'msg': 'Field required', 'input': {'last_name': 'Pena', 'total_price': 131, 'deposit_paid': True, 'check_in': '2026-04-13', 'check_out': '2026-05-26', 'additional_needs': 'majority'}}]}
+2026-04-07 13:33:02,612 | booking_service | INFO | [req: 5a87a011] REQUEST GET /bookings
+2026-04-07 13:33:04,663 | booking_service | INFO | [req: 5a87a011] RESPONSE GET /bookings | 200 | 2.051s
+2026-04-07 13:33:04,664 | booking_service | INFO | [req: 5a87a011] RESPONSE BODY: [{'first_name': 'Sonya', 'last_name': 'Garcia', 'total_price': 215, 'deposit_paid': False, 'check_in': '2026-04-16', 'check_out': '2026-04-20', 'additional_needs': 'itself', 'id': 5}, {'first_name': 'Kathleen', 'last_name': 'Morton', 'total_price': 106, 'deposit_paid': True, 'check_in': '2026-04-08', 'check_out': '2026-04-10', 'additional_needs': 'bit', 'id': 6}, {'first_name': 'Kayla', 'last_name': 'Davis', 'total_price': 308, 'deposit_paid': True, 'check_in': '2026-04-10', 'check_out': '2026-0
+2026-04-07 13:33:04,666 | booking_service | INFO | [req: b10de41f] REQUEST PUT /bookings/134
+2026-04-07 13:33:04,666 | booking_service | INFO | [req: b10de41f] PAYLOAD: {'first_name': 'Allison', 'last_name': 'Perkins', 'deposit_paid': True, 'check_in': '2026-04-27', 'check_out': '2026-05-19', 'additional_needs': 'evidence'}
+2026-04-07 13:33:06,702 | booking_service | ERROR | [req: b10de41f] RESPONSE PUT /bookings/134 | 422 | 2.036s
+2026-04-07 13:33:06,702 | booking_service | ERROR | [req: b10de41f] RESPONSE BODY: {'detail': [{'type': 'missing', 'loc': ['body', 'total_price'], 'msg': 'Field required', 'input': {'first_name': 'Allison', 'last_name': 'Perkins', 'deposit_paid': True, 'check_in': '2026-04-27', 'check_out': '2026-05-19', 'additional_needs': 'evidence'}}]}
+2026-04-07 13:33:06,704 | booking_service | INFO | [req: 0882436c] REQUEST GET /bookings
+2026-04-07 13:33:08,717 | booking_service | INFO | [req: 0882436c] RESPONSE GET /bookings | 200 | 2.012s
+2026-04-07 13:33:08,717 | booking_service | INFO | [req: 0882436c] RESPONSE BODY: [{'first_name': 'Sonya', 'last_name': 'Garcia', 'total_price': 215, 'deposit_paid': False, 'check_in': '2026-04-16', 'check_out': '2026-04-20', 'additional_needs': 'itself', 'id': 5}, {'first_name': 'Kathleen', 'last_name': 'Morton', 'total_price': 106, 'deposit_paid': True, 'check_in': '2026-04-08', 'check_out': '2026-04-10', 'additional_needs': 'bit', 'id': 6}, {'first_name': 'Kayla', 'last_name': 'Davis', 'total_price': 308, 'deposit_paid': True, 'check_in': '2026-04-10', 'check_out': '2026-0
+2026-04-07 13:33:08,718 | booking_service | INFO | [req: 5db5f082] REQUEST PUT /bookings/134
+2026-04-07 13:33:08,718 | booking_service | INFO | [req: 5db5f082] PAYLOAD: {'first_name': 'Robin', 'last_name': 'Lane', 'total_price': 124, 'deposit_paid': False, 'check_out': '2026-05-25', 'additional_needs': 'before'}
+2026-04-07 13:33:10,758 | booking_service | ERROR | [req: 5db5f082] RESPONSE PUT /bookings/134 | 422 | 2.039s
+2026-04-07 13:33:10,758 | booking_service | ERROR | [req: 5db5f082] RESPONSE BODY: {'detail': [{'type': 'missing', 'loc': ['body', 'check_in'], 'msg': 'Field required', 'input': {'first_name': 'Robin', 'last_name': 'Lane', 'total_price': 124, 'deposit_paid': False, 'check_out': '2026-05-25', 'additional_needs': 'before'}}]}
+2026-04-07 13:33:10,761 | booking_service | INFO | [req: 94916ea2] REQUEST GET /bookings
+2026-04-07 13:33:12,807 | booking_service | INFO | [req: 94916ea2] RESPONSE GET /bookings | 200 | 2.047s
+2026-04-07 13:33:12,808 | booking_service | INFO | [req: 94916ea2] RESPONSE BODY: [{'first_name': 'Sonya', 'last_name': 'Garcia', 'total_price': 215, 'deposit_paid': False, 'check_in': '2026-04-16', 'check_out': '2026-04-20', 'additional_needs': 'itself', 'id': 5}, {'first_name': 'Kathleen', 'last_name': 'Morton', 'total_price': 106, 'deposit_paid': True, 'check_in': '2026-04-08', 'check_out': '2026-04-10', 'additional_needs': 'bit', 'id': 6}, {'first_name': 'Kayla', 'last_name': 'Davis', 'total_price': 308, 'deposit_paid': True, 'check_in': '2026-04-10', 'check_out': '2026-0
+2026-04-07 13:33:12,809 | booking_service | INFO | [req: 643597b9] REQUEST PUT /bookings/134
+2026-04-07 13:33:12,809 | booking_service | INFO | [req: 643597b9] PAYLOAD: {'first_name': 1337, 'last_name': 'Castillo', 'total_price': 375, 'deposit_paid': True, 'check_in': '2026-04-30', 'check_out': '2026-05-22', 'additional_needs': 'apply'}
+2026-04-07 13:33:14,843 | booking_service | ERROR | [req: 643597b9] RESPONSE PUT /bookings/134 | 422 | 2.034s
+2026-04-07 13:33:14,843 | booking_service | ERROR | [req: 643597b9] RESPONSE BODY: {'detail': [{'type': 'string_type', 'loc': ['body', 'first_name'], 'msg': 'Input should be a valid string', 'input': 1337}]}
+2026-04-07 13:33:14,845 | booking_service | INFO | [req: 60ab5c36] REQUEST GET /bookings
+2026-04-07 13:33:16,887 | booking_service | INFO | [req: 60ab5c36] RESPONSE GET /bookings | 200 | 2.042s
+2026-04-07 13:33:16,888 | booking_service | INFO | [req: 60ab5c36] RESPONSE BODY: [{'first_name': 'Sonya', 'last_name': 'Garcia', 'total_price': 215, 'deposit_paid': False, 'check_in': '2026-04-16', 'check_out': '2026-04-20', 'additional_needs': 'itself', 'id': 5}, {'first_name': 'Kathleen', 'last_name': 'Morton', 'total_price': 106, 'deposit_paid': True, 'check_in': '2026-04-08', 'check_out': '2026-04-10', 'additional_needs': 'bit', 'id': 6}, {'first_name': 'Kayla', 'last_name': 'Davis', 'total_price': 308, 'deposit_paid': True, 'check_in': '2026-04-10', 'check_out': '2026-0
+2026-04-07 13:33:16,888 | booking_service | INFO | [req: 60f06edd] REQUEST PUT /bookings/134
+2026-04-07 13:33:16,888 | booking_service | INFO | [req: 60f06edd] PAYLOAD: {'first_name': 'Madison', 'last_name': 'Griffin', 'total_price': 'fifty dollars', 'deposit_paid': False, 'check_in': '2026-04-13', 'check_out': '2026-04-22', 'additional_needs': 'store'}
+2026-04-07 13:33:18,927 | booking_service | ERROR | [req: 60f06edd] RESPONSE PUT /bookings/134 | 422 | 2.038s
+2026-04-07 13:33:18,927 | booking_service | ERROR | [req: 60f06edd] RESPONSE BODY: {'detail': [{'type': 'int_parsing', 'loc': ['body', 'total_price'], 'msg': 'Input should be a valid integer, unable to parse string as an integer', 'input': 'fifty dollars'}]}
+2026-04-07 13:33:18,929 | booking_service | INFO | [req: ba2863fe] REQUEST GET /bookings
+2026-04-07 13:33:20,954 | booking_service | INFO | [req: ba2863fe] RESPONSE GET /bookings | 200 | 2.025s
+2026-04-07 13:33:20,954 | booking_service | INFO | [req: ba2863fe] RESPONSE BODY: [{'first_name': 'Sonya', 'last_name': 'Garcia', 'total_price': 215, 'deposit_paid': False, 'check_in': '2026-04-16', 'check_out': '2026-04-20', 'additional_needs': 'itself', 'id': 5}, {'first_name': 'Kathleen', 'last_name': 'Morton', 'total_price': 106, 'deposit_paid': True, 'check_in': '2026-04-08', 'check_out': '2026-04-10', 'additional_needs': 'bit', 'id': 6}, {'first_name': 'Kayla', 'last_name': 'Davis', 'total_price': 308, 'deposit_paid': True, 'check_in': '2026-04-10', 'check_out': '2026-0
+2026-04-07 13:33:20,955 | booking_service | INFO | [req: 1a38b433] REQUEST PUT /bookings/134
+2026-04-07 13:33:20,955 | booking_service | INFO | [req: 1a38b433] PAYLOAD: {'first_name': 'Isaac', 'last_name': 'Molina', 'total_price': 352, 'deposit_paid': True, 'check_in': 3.14, 'check_out': '2026-04-23', 'additional_needs': 'chance'}
+2026-04-07 13:33:22,982 | booking_service | ERROR | [req: 1a38b433] RESPONSE PUT /bookings/134 | 422 | 2.027s
+2026-04-07 13:33:22,982 | booking_service | ERROR | [req: 1a38b433] RESPONSE BODY: {'detail': [{'type': 'string_type', 'loc': ['body', 'check_in'], 'msg': 'Input should be a valid string', 'input': 3.14}]}
+2026-04-07 13:33:22,985 | booking_service | INFO | [req: f628a3bc] REQUEST GET /bookings
+2026-04-07 13:33:25,016 | booking_service | INFO | [req: f628a3bc] RESPONSE GET /bookings | 200 | 2.031s
+2026-04-07 13:33:25,016 | booking_service | INFO | [req: f628a3bc] RESPONSE BODY: [{'first_name': 'Sonya', 'last_name': 'Garcia', 'total_price': 215, 'deposit_paid': False, 'check_in': '2026-04-16', 'check_out': '2026-04-20', 'additional_needs': 'itself', 'id': 5}, {'first_name': 'Kathleen', 'last_name': 'Morton', 'total_price': 106, 'deposit_paid': True, 'check_in': '2026-04-08', 'check_out': '2026-04-10', 'additional_needs': 'bit', 'id': 6}, {'first_name': 'Kayla', 'last_name': 'Davis', 'total_price': 308, 'deposit_paid': True, 'check_in': '2026-04-10', 'check_out': '2026-0
+2026-04-07 13:33:25,017 | booking_service | INFO | [req: ec93a028] REQUEST PUT /bookings/134
+2026-04-07 13:33:25,017 | booking_service | INFO | [req: ec93a028] PAYLOAD: {'first_name': 'Charles', 'last_name': 'Fields', 'total_price': 195, 'deposit_paid': 'notabool', 'check_in': '2026-05-06', 'check_out': '2026-05-08', 'additional_needs': 'eye'}
+2026-04-07 13:33:27,037 | booking_service | ERROR | [req: ec93a028] RESPONSE PUT /bookings/134 | 422 | 2.020s
+2026-04-07 13:33:27,037 | booking_service | ERROR | [req: ec93a028] RESPONSE BODY: {'detail': [{'type': 'bool_parsing', 'loc': ['body', 'deposit_paid'], 'msg': 'Input should be a valid boolean, unable to interpret input', 'input': 'notabool'}]}

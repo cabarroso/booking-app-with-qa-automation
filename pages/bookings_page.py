@@ -1,9 +1,13 @@
 from playwright.sync_api import Locator, Page
 
+from config import UI_BASE_URL
+
+
+
 class BookingsPage():
     def __init__(self, page: Page):
         self.page = page
-        self.base_url = "http://localhost:5173/bookings"
+        self.base_url = f"{UI_BASE_URL}/bookings"
 
     @property
     def current_url(self) -> str:

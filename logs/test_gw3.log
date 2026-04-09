@@ -1,0 +1,28 @@
+2026-04-08 14:29:10,925 | booking_service | INFO | [req: 12388ccc] REQUEST POST /bookings
+2026-04-08 14:29:10,925 | booking_service | INFO | [req: 12388ccc] PAYLOAD: {'first_name': '', 'last_name': 'Russell', 'total_price': 497, 'deposit_paid': True, 'check_in': '2026-04-14', 'check_out': '2026-04-26', 'additional_needs': 'fund'}
+2026-04-08 14:29:12,978 | booking_service | ERROR | [req: 12388ccc] RESPONSE POST /bookings | 422 | 2.053s
+2026-04-08 14:29:12,978 | booking_service | ERROR | [req: 12388ccc] RESPONSE BODY: {'detail': [{'type': 'string_too_short', 'loc': ['body', 'first_name'], 'msg': 'String should have at least 1 character', 'input': '', 'ctx': {'min_length': 1}}]}
+2026-04-08 14:32:11,932 | booking_service | INFO | [req: 9bb333c4] REQUEST POST /bookings
+2026-04-08 14:32:11,933 | booking_service | INFO | [req: 9bb333c4] PAYLOAD: {'first_name': '', 'last_name': 'Mosley', 'total_price': 103, 'deposit_paid': True, 'check_in': '2026-05-02', 'check_out': '2026-05-27', 'additional_needs': 'fund'}
+2026-04-08 14:32:13,992 | booking_service | ERROR | [req: 9bb333c4] RESPONSE POST /bookings | 422 | 2.059s
+2026-04-08 14:32:13,992 | booking_service | ERROR | [req: 9bb333c4] RESPONSE BODY: {'detail': [{'type': 'string_too_short', 'loc': ['body', 'first_name'], 'msg': 'String should have at least 1 character', 'input': '', 'ctx': {'min_length': 1}}]}
+2026-04-08 14:43:35,300 | booking_service | INFO | [req: 25dc3484] REQUEST POST /bookings
+2026-04-08 14:43:35,301 | booking_service | INFO | [req: 25dc3484] PAYLOAD: {'first_name': '', 'last_name': 'Williams', 'total_price': 465, 'deposit_paid': True, 'check_in': '2026-04-29', 'check_out': '2026-06-04', 'additional_needs': 'career'}
+2026-04-08 14:43:37,340 | booking_service | ERROR | [req: 25dc3484] RESPONSE POST /bookings | 422 | 2.039s
+2026-04-08 14:43:37,341 | booking_service | ERROR | [req: 25dc3484] RESPONSE BODY: {'detail': [{'type': 'string_too_short', 'loc': ['body', 'first_name'], 'msg': 'String should have at least 1 character', 'input': '', 'ctx': {'min_length': 1}}]}
+2026-04-08 14:49:14,100 | booking_service | INFO | [req: 11fdc87b] REQUEST POST /bookings
+2026-04-08 14:49:14,101 | booking_service | INFO | [req: 11fdc87b] PAYLOAD: {'first_name': '<script>', 'last_name': 'Barrett', 'total_price': 299, 'deposit_paid': True, 'check_in': '2026-04-25', 'check_out': '2026-06-05', 'additional_needs': 'trial'}
+2026-04-08 14:49:16,156 | booking_service | ERROR | [req: 11fdc87b] RESPONSE POST /bookings | 422 | 2.055s
+2026-04-08 14:49:16,157 | booking_service | ERROR | [req: 11fdc87b] RESPONSE BODY: {'detail': [{'type': 'value_error', 'loc': ['body', 'first_name'], 'msg': 'Value error, Invalid characters in name', 'input': '<script>', 'ctx': {'error': {}}}]}
+2026-04-08 14:49:16,162 | booking_service | INFO | [req: 6011a3c2] REQUEST POST /bookings
+2026-04-08 14:49:16,162 | booking_service | INFO | [req: 6011a3c2] PAYLOAD: {'first_name': 'Brian', 'last_name': 'SELECT *', 'total_price': 374, 'deposit_paid': False, 'check_in': '2026-04-19', 'check_out': '2026-05-14', 'additional_needs': 'write'}
+2026-04-08 14:49:18,200 | booking_service | ERROR | [req: 6011a3c2] RESPONSE POST /bookings | 422 | 2.038s
+2026-04-08 14:49:18,200 | booking_service | ERROR | [req: 6011a3c2] RESPONSE BODY: {'detail': [{'type': 'value_error', 'loc': ['body', 'last_name'], 'msg': 'Value error, Invalid characters in name', 'input': 'SELECT *', 'ctx': {'error': {}}}]}
+2026-04-08 14:49:46,027 | booking_service | INFO | [req: 5f16728c] REQUEST POST /bookings
+2026-04-08 14:49:46,027 | booking_service | INFO | [req: 5f16728c] PAYLOAD: {'first_name': '<script>', 'last_name': 'Bray', 'total_price': 141, 'deposit_paid': False, 'check_in': '2026-04-10', 'check_out': '2026-05-05', 'additional_needs': 'work'}
+2026-04-08 14:49:48,071 | booking_service | ERROR | [req: 5f16728c] RESPONSE POST /bookings | 422 | 2.043s
+2026-04-08 14:49:48,071 | booking_service | ERROR | [req: 5f16728c] RESPONSE BODY: {'detail': [{'type': 'value_error', 'loc': ['body', 'first_name'], 'msg': 'Value error, Invalid characters in name', 'input': '<script>', 'ctx': {'error': {}}}]}
+2026-04-08 14:49:48,077 | booking_service | INFO | [req: 267230b7] REQUEST POST /bookings
+2026-04-08 14:49:48,077 | booking_service | INFO | [req: 267230b7] PAYLOAD: {'first_name': 'Julia', 'last_name': 'SELECT *', 'total_price': 121, 'deposit_paid': False, 'check_in': '2026-05-01', 'check_out': '2026-06-06', 'additional_needs': 'purpose'}
+2026-04-08 14:49:50,104 | booking_service | ERROR | [req: 267230b7] RESPONSE POST /bookings | 422 | 2.026s
+2026-04-08 14:49:50,104 | booking_service | ERROR | [req: 267230b7] RESPONSE BODY: {'detail': [{'type': 'value_error', 'loc': ['body', 'last_name'], 'msg': 'Value error, Invalid characters in name', 'input': 'SELECT *', 'ctx': {'error': {}}}]}

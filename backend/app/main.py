@@ -8,7 +8,8 @@ from app.models.booking import Booking
 app = FastAPI()
 
 origins = [
-    "http://localhost:5173" # front end app
+    "http://localhost:5173",
+    "http://localhost:3000"
 ]
 
 app.add_middleware(

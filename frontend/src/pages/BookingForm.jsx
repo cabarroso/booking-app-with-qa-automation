@@ -128,15 +128,15 @@ function BookingForm() {
             <h2>Create Booking</h2>
             <form onSubmit={handleSubmit}>
 
-                <label for="firstname">First Name</label>
+                <label htmlFor="firstname">First Name</label>
                 <input id="firstname" name="firstname" onChange={handleChange} />
                 {errors.firstname && <p>{errors.firstname}</p>}
 
-                <label for="lastname">Last Name</label>
+                <label htmlFor="lastname">Last Name</label>
                 <input id="lastname" name="lastname" onChange={handleChange} />
                 {errors.lastname && <p>{errors.lastname}</p>}
 
-                <label for="totalprice">Total Price</label>
+                <label htmlFor="totalprice">Total Price</label>
                 <input id="totalprice" name="totalprice" type="number" onChange={handleChange} />
                 {errors.totalprice && <p>{errors.totalprice}</p>}
 
@@ -145,15 +145,15 @@ function BookingForm() {
                     <input id="depositpaid" name="depositpaid" type="checkbox" onChange={handleChange} />
                 </label>
 
-                <label for="checkin">Check In</label>
+                <label htmlFor="checkin">Check In</label>
                 <input id="checkin" name="checkin" type="date" onChange={handleChange} />
                 {errors.checkin && <p>{errors.checkin}</p>}
 
-                <label for="checkout">Check Out</label>
+                <label htmlFor="checkout">Check Out</label>
                 <input id="checkout" name="checkout" type="date" onChange={handleChange} />
                 {errors.checkout && <p>{errors.checkout}</p>}
 
-                <label for="additionalneeds">Additional Needs</label>
+                <label htmlFor="additionalneeds">Additional Needs</label>
                 <input id="additionalneeds" name="additionalneeds" onChange={handleChange} />
 
                 <button type="submit" data-testid="submit-booking" disabled={loading}>

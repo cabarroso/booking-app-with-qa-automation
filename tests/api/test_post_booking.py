@@ -54,3 +54,50 @@ def test_invalid_value_type(booking_service, booking_data, field, value):
     response = booking_service.create_booking(booking_data)
 
     assert response.status_code == 422
+
+@pytest.mark.post_booking
+@pytest.mark.error
+@pytest.mark.parametrize("field, value", 
+                         [
+                             ("first_name", "a"*1000),
+                             ("last_name", "a"*1000),
+                             ("total_price", 1_000_001)
+                         ],
+                         ids=["first_name", "last_name", "total_price"])
+def test_large_input(booking_service, booking_data, field, value):
+    booking_data[field] = value
+
+    response = booking_service.create_booking(booking_data)
+
+    assert response.status_code == 422
+
+@pytest.mark.post_booking
+@pytest.mark.error
+@pytest.mark.parametrize("field, value", 
+                         [
+                             ("first_name", ""),
+                             ("last_name", ""),
+                             ("total_price", "")
+                         ],
+                         ids=["first_name", "last_name", "total_price"])
+def test_empty_field(booking_service, booking_data, field, value):
+    booking_data[field] = value
+
+    response = booking_service.create_booking(booking_data)
+
+    assert response.status_code == 422
+
+@pytest.mark.post_booking
+@pytest.mark.error
+@pytest.mark.parametrize("field, value", 
+                         [
+                             ("first_name", "<script>"),
+                             ("last_name", "SELECT *")
+                         ],
+                         ids=["first_name", "last_name"])
+def test_special_chars(booking_service, booking_data, field, value):
+    booking_data[field] = value
+
+    response = booking_service.create_booking(booking_data)
+
+    assert response.status_code == 422

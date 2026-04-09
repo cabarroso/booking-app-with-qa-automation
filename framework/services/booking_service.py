@@ -3,9 +3,9 @@ import logging
 import time
 import uuid
 
-logger = logging.getLogger("booking_service")
+from config import API_BASE_URL
 
-BASE_URL = "http://localhost:8000"
+logger = logging.getLogger("booking_service")
 
 class BookingService:
 
@@ -18,7 +18,7 @@ class BookingService:
             logger.info(f"[req: {request_id}] PAYLOAD: {booking_data}")
 
         start = time.time()
-        response = requests.request(method, f"{BASE_URL}{endpoint}", json=booking_data)
+        response = requests.request(method, f"{API_BASE_URL}{endpoint}", json=booking_data)
         try:
             response_body = response.json()
         except Exception:

@@ -1,0 +1,74 @@
+name: CI Pipeline
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Python
+        run: |
+          pip install -r requirements.txt
+
+      - name: Install Playwright
+        run: |
+          pip install playwright
+          playwright install --with-deps
+
+      - name: Start backend
+        run: uvicorn app.main:app &
+
+      - name: Wait for API
+        run: |
+          for i in {1..10}; do
+            curl -s http://localhost:8000/docs && break
+            sleep 2
+          done
+
+      - name: Run API tests
+        run: pytest tests/api -n 2 --html=api-report.html
+
+      - name: Upload reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: API report
+          path: |
+            api-report.html
+
+      # START OF FRONTEND
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version:18
+
+      - name: Install frontend dependencies
+        run: |
+          cd frontend
+          npm install
+
+      - name: Start frontend
+        run: |
+          cd frontend
+          npm run build
+          npm run preview
+
+      - name: Wait for frontend
+        run: |
+          for i in {1..10}; do
+            curl -s http://localhost:5173 && break
+            sleep 2
+          done
+
+      - name: Run UI tests
+        run: pytest tests/ui -n 2 --html=ui-report.html
+
+      - name: Upload reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: UI-report
+          path: |
+            ui-report.html

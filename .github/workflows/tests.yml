@@ -18,6 +18,9 @@ jobs:
           pip install playwright
           playwright install --with-deps
 
+      - name: Set PYTHONPATH
+        run: echo "PYTHONPATH=$PWD" >> $GITHUB_ENV
+
       - name: Start backend
         run: |
           cd backend

@@ -19,7 +19,9 @@ jobs:
           playwright install --with-deps
 
       - name: Start backend
-        run: uvicorn app.main:app &
+        run: |
+          cd backend
+          uvicorn app.main:app &
 
       - name: Wait for API
         run: |

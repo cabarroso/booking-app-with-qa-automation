@@ -7,15 +7,15 @@ from app.models.booking import Booking
 
 app = FastAPI()
 
-origins = [
-    "http://localhost:5173",
-    "http://localhost:3000"
-]
+# origins = [
+#     "http://localhost:5173",
+#     "http://localhost:3000"
+# ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["*"],  # allows OPTIONS, POST, etc.
     allow_headers=["*"],
 )

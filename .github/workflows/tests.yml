@@ -1,81 +1,81 @@
-name: CI Pipeline
+# name: CI Pipeline
 
-on: [push, pull_request]
+# on: [push, pull_request]
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
+# jobs:
+#   test:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v4
+#     steps:
+#       - uses: actions/checkout@v4
 
-      - name: Setup Python
-        run: |
-          pip install -r requirements.txt
+#       - name: Setup Python
+#         run: |
+#           pip install -r requirements.txt
 
-      - name: Install Playwright
-        run: |
-          pip install playwright
-          playwright install --with-deps
+#       - name: Install Playwright
+#         run: |
+#           pip install playwright
+#           playwright install --with-deps
 
-      - name: Set PYTHONPATH
-        run: echo "PYTHONPATH=$PWD" >> $GITHUB_ENV
+#       - name: Set PYTHONPATH
+#         run: echo "PYTHONPATH=$PWD" >> $GITHUB_ENV
 
-      - name: Start backend
-        run: |
-          cd backend
-          uvicorn app.main:app &
+#       - name: Start backend
+#         run: |
+#           cd backend
+#           uvicorn app.main:app &
 
-      - name: Wait for API
-        run: |
-          for i in {1..10}; do
-            curl -s http://localhost:8000/docs && break
-            sleep 2
-          done
+#       - name: Wait for API
+#         run: |
+#           for i in {1..10}; do
+#             curl -s http://localhost:8000/docs && break
+#             sleep 2
+#           done
 
-      - name: Run API tests
-        run: pytest tests/api -n 2 --html=api-report.html
+#       - name: Run API tests
+#         run: pytest tests/api -n 2 --html=api-report.html
 
-      - name: Upload reports
-        uses: actions/upload-artifact@v4
-        with:
-          name: API report
-          path: |
-            api-report.html
+#       - name: Upload reports
+#         uses: actions/upload-artifact@v4
+#         with:
+#           name: API report
+#           path: |
+#             api-report.html
 
-      # START OF FRONTEND
+#       # START OF FRONTEND
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
+#       - name: Setup Node
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: 20
 
-      - name: Install frontend dependencies
-        run: |
-          cd frontend
-          npm install
+#       - name: Install frontend dependencies
+#         run: |
+#           cd frontend
+#           npm install
 
-      - name: Start frontend
-        run: |
-          cd frontend
-          npm run dev -- --host 0.0.0.0 &
+#       - name: Start frontend
+#         run: |
+#           cd frontend
+#           npm run dev -- --host 0.0.0.0 &
 
-      - name: Wait for frontend
-        run: |
-          for i in {1..20}; do
-            curl -s http://localhost:5173 | grep "<!doctype html>" && break
-            sleep 2
-          done
+#       - name: Wait for frontend
+#         run: |
+#           for i in {1..20}; do
+#             curl -s http://localhost:5173 | grep "<!doctype html>" && break
+#             sleep 2
+#           done
 
-      - name: Set UI base URL
-        run: echo "UI_BASE_URL=http://localhost:5173" >> $GITHUB_ENV
+#       - name: Set UI base URL
+#         run: echo "UI_BASE_URL=http://localhost:5173" >> $GITHUB_ENV
 
-      - name: Run UI tests
-        run: pytest tests/ui -n 2 --html=ui-report.html
+#       - name: Run UI tests
+#         run: pytest tests/ui -n 2 --html=ui-report.html
 
-      - name: Upload reports
-        uses: actions/upload-artifact@v4
-        with:
-          name: UI-report
-          path: |
-            ui-report.html
+#       - name: Upload reports
+#         uses: actions/upload-artifact@v4
+#         with:
+#           name: UI-report
+#           path: |
+#             ui-report.html

@@ -568,3 +568,26 @@
 2026-04-09 07:45:14,999 | booking_service | INFO | [req: 9e3343ff] PAYLOAD: {'first_name': 'Ryan', 'last_name': 'SELECT *', 'total_price': 269, 'deposit_paid': False, 'check_in': '2026-04-20', 'check_out': '2026-06-06', 'additional_needs': 'prevent'}
 2026-04-09 07:45:17,005 | booking_service | ERROR | [req: 9e3343ff] RESPONSE POST /bookings | 422 | 2.006s
 2026-04-09 07:45:17,005 | booking_service | ERROR | [req: 9e3343ff] RESPONSE BODY: {'detail': [{'type': 'value_error', 'loc': ['body', 'last_name'], 'msg': 'Value error, Invalid characters in name', 'input': 'SELECT *', 'ctx': {'error': {}}}]}
+2026-04-15 08:18:00,326 | booking_service | INFO | [req: 158d025b] REQUEST POST /bookings
+2026-04-15 08:18:00,327 | booking_service | INFO | [req: 158d025b] PAYLOAD: {'first_name': 'Kenneth', 'last_name': 'Johnson', 'total_price': 423, 'deposit_paid': False, 'check_in': '2026-05-08', 'check_out': '2026-05-10', 'additional_needs': 'hospital'}
+2026-04-15 08:18:02,378 | booking_service | INFO | [req: 158d025b] RESPONSE POST /bookings | 201 | 2.051s
+2026-04-15 08:18:02,378 | booking_service | INFO | [req: 158d025b] RESPONSE BODY: {'first_name': 'Kenneth', 'last_name': 'Johnson', 'total_price': 423, 'deposit_paid': False, 'check_in': '2026-05-08', 'check_out': '2026-05-10', 'additional_needs': 'hospital', 'id': 4}
+2026-04-15 08:21:21,891 | booking_service | INFO | [req: dd50706e] REQUEST POST /bookings
+2026-04-15 08:21:21,891 | booking_service | INFO | [req: dd50706e] PAYLOAD: {'first_name': 'Brent', 'last_name': 'Christensen', 'total_price': 312, 'deposit_paid': True, 'check_in': '2026-05-06', 'check_out': '2026-05-19', 'additional_needs': 'manager'}
+2026-04-15 08:21:23,939 | booking_service | INFO | [req: dd50706e] RESPONSE POST /bookings | 201 | 2.048s
+2026-04-15 08:21:23,939 | booking_service | INFO | [req: dd50706e] RESPONSE BODY: {'first_name': 'Brent', 'last_name': 'Christensen', 'total_price': 312, 'deposit_paid': True, 'check_in': '2026-05-06', 'check_out': '2026-05-19', 'additional_needs': 'manager', 'id': 5}
+2026-04-15 08:22:46,114 | booking_service | INFO | [req: 2d8198b0] REQUEST POST /bookings
+2026-04-15 08:22:46,114 | booking_service | INFO | [req: 2d8198b0] PAYLOAD: {'first_name': 'Kelli', 'last_name': 'Gibson', 'total_price': 195, 'deposit_paid': True, 'check_in': '2026-04-21', 'check_out': '2026-05-30', 'additional_needs': 'former'}
+2026-04-15 08:22:48,164 | booking_service | INFO | [req: 2d8198b0] RESPONSE POST /bookings | 201 | 2.050s
+2026-04-15 08:22:48,164 | booking_service | INFO | [req: 2d8198b0] RESPONSE BODY: {'first_name': 'Kelli', 'last_name': 'Gibson', 'total_price': 195, 'deposit_paid': True, 'check_in': '2026-04-21', 'check_out': '2026-05-30', 'additional_needs': 'former', 'id': 6}
+2026-04-15 08:24:51,557 | booking_service | INFO | [req: 387f66e9] REQUEST POST /bookings
+2026-04-15 08:24:51,558 | booking_service | INFO | [req: 387f66e9] PAYLOAD: {'first_name': 'John', 'last_name': 'Wall', 'total_price': 307, 'deposit_paid': False, 'check_in': '2026-05-12', 'check_out': '2026-05-13', 'additional_needs': 'involve'}
+2026-04-15 08:24:53,602 | booking_service | INFO | [req: 387f66e9] RESPONSE POST /bookings | 201 | 2.044s
+2026-04-15 08:24:53,602 | booking_service | INFO | [req: 387f66e9] RESPONSE BODY: {'first_name': 'John', 'last_name': 'Wall', 'total_price': 307, 'deposit_paid': False, 'check_in': '2026-05-12', 'check_out': '2026-05-13', 'additional_needs': 'involve', 'id': 7}
+2026-04-15 08:27:21,467 | booking_service | INFO | [req: a1cfd4ed] REQUEST POST /bookings
+2026-04-15 08:27:21,468 | booking_service | INFO | [req: a1cfd4ed] PAYLOAD: {'first_name': 'Elizabeth', 'last_name': 'Sullivan', 'total_price': 200, 'deposit_paid': True, 'check_in': '2026-05-05', 'check_out': '2026-06-13', 'additional_needs': 'activity'}
+2026-04-15 08:27:23,514 | booking_service | INFO | [req: a1cfd4ed] RESPONSE POST /bookings | 201 | 2.047s
+2026-04-15 08:27:23,515 | booking_service | INFO | [req: a1cfd4ed] RESPONSE BODY: {'first_name': 'Elizabeth', 'last_name': 'Sullivan', 'total_price': 200, 'deposit_paid': True, 'check_in': '2026-05-05', 'check_out': '2026-06-13', 'additional_needs': 'activity', 'id': 8}
+2026-04-15 08:27:23,625 | booking_service | INFO | [req: 9a35736c] REQUEST DELETE /bookings/8
+2026-04-15 08:27:25,661 | booking_service | INFO | [req: 9a35736c] RESPONSE DELETE /bookings/8 | 204 | 2.036s
+2026-04-15 08:27:25,661 | booking_service | INFO | [req: 9a35736c] RESPONSE BODY: 

@@ -1,4 +1,5 @@
 import pytest
+from playwright.sync_api import expect
 
 # Idea: to create a booking via API and verify it appears in the UI, then cleanup
 @pytest.mark.hybrid
@@ -16,7 +17,8 @@ def test_create_booking_via_api(booking_service, booking_data, bookings_page, va
     # Open UI
     bookings_page.reload()
 
-    # Verify new booking appears
+    # Verify new booking appears on page and data matches API response using UI
+    expect(bookings_page.get_booking_row_by_id(api_response_new_booking["id"])).to_be_visible()
     bookings_page_new_booking = bookings_page.get_booking_data_by_id(api_response_new_booking["id"])
     assert bookings_page_new_booking is not None
     assert bookings_page_new_booking["first_name"] == api_response_new_booking["first_name"]
@@ -34,15 +36,24 @@ def test_create_booking_via_api(booking_service, booking_data, bookings_page, va
 @pytest.mark.hybrid
 @pytest.mark.booking
 @pytest.mark.delete
-def test_delete_booking_via_api(booking_service, bookings_page):
-    # Open UI and get last booking
-    last_booking_id = bookings_page.get_last_booking_id()
+def test_delete_booking_via_api(booking_service, booking_data, bookings_page, validate_booking):
+    # Create booking via API
+    response = booking_service.create_booking(booking_data)
+    new_booking = response.json()
 
-    # Delete via API
-    booking_service.delete_booking(last_booking_id)
+    # Validate response against schema
+    validate_booking(new_booking)
 
+    # Open UI
     bookings_page.reload()
 
-    # Verify
-    assert bookings_page.get_last_booking_id() != last_booking_id
-    
+    # Verify new booking appears
+    bookings_page.get_booking_data_by_id(new_booking["id"])
+    assert bookings_page.get_booking_data_by_id(new_booking["id"]) is not None
+
+    # Delete via API
+    booking_service.delete_booking(new_booking["id"])
+    bookings_page.reload()
+
+    # Verify deleted booking no longer appears on page
+    expect(bookings_page.get_booking_row_by_id(new_booking["id"])).not_to_be_visible()

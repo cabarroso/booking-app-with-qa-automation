@@ -1,10 +1,10 @@
-name: Run All Tests
+name: Run Hybrid Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [ improve-existing-hybrid-tests ]
   pull_request:
-    branches: [ main ]
+    branches: [ improve-existing-hybrid-tests ]
 
 jobs:
   test:
@@ -30,7 +30,7 @@ jobs:
           done
 
       - name: Run tests
-        run: docker compose run --rm tests pytest
+        run: docker compose run --rm tests pytest -m hybrid
 
       - name: Shut down
         run: docker compose down

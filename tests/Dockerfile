@@ -10,4 +10,4 @@ COPY . .
 
 ENV PYTHONPATH=/app
 
-CMD ["pytest"]
+CMD ["sleep", "infinity"]

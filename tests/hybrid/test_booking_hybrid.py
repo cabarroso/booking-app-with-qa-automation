@@ -22,7 +22,7 @@ def test_create_booking_via_api(booking_service, booking_data, bookings_page, va
 
     # Verify new booking appears on page and data matches API response using UI
     try:
-        expect(bookings_page.get_booking_row_by_id(api_response_new_booking["id"])).to_be_visible()
+        expect(bookings_page.get_booking_row_by_id(api_response_new_booking["id"])).to_be_visible(timeout=5000)
         bookings_page_new_booking = bookings_page.get_booking_data_by_id(api_response_new_booking["id"])
         assert bookings_page_new_booking is not None
         assert_booking_data(api_response_new_booking, bookings_page_new_booking)
@@ -38,7 +38,6 @@ def test_create_booking_via_api(booking_service, booking_data, bookings_page, va
 def test_delete_booking_via_api(booking_service, booking_data, bookings_page, validate_booking):
     # Create booking via API
     response = booking_service.create_booking(booking_data)
-
     assert response.status_code == 201
 
     new_booking = response.json()
@@ -51,7 +50,7 @@ def test_delete_booking_via_api(booking_service, booking_data, bookings_page, va
 
     try:
         # Verify new booking appears on page
-        expect(bookings_page.get_booking_row_by_id(new_booking["id"])).to_be_visible()
+        expect(bookings_page.get_booking_row_by_id(new_booking["id"])).to_be_visible(timeout=5000)
 
         # Delete via API
         delete_response = booking_service.delete_booking(new_booking["id"])
@@ -64,7 +63,7 @@ def test_delete_booking_via_api(booking_service, booking_data, bookings_page, va
         bookings_page.reload()
 
         # Verify deleted booking no longer appears on page
-        expect(bookings_page.get_booking_row_by_id(new_booking["id"])).not_to_be_visible()
+        expect(bookings_page.get_booking_row_by_id(new_booking["id"])).not_to_be_visible(timeout=5000)
     finally:
         try:
             # cleanup in case fail before delete

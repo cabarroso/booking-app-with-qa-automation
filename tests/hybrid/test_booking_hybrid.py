@@ -9,6 +9,9 @@ def test_create_booking_via_api(booking_service, booking_data, bookings_page, va
 
     # Create booking via API
     response = booking_service.create_booking(booking_data)
+
+    assert response.status_code == 201
+
     api_response_new_booking = response.json()
 
     # Validate response against schema
@@ -39,6 +42,9 @@ def test_create_booking_via_api(booking_service, booking_data, bookings_page, va
 def test_delete_booking_via_api(booking_service, booking_data, bookings_page, validate_booking):
     # Create booking via API
     response = booking_service.create_booking(booking_data)
+
+    assert response.status_code == 201
+
     new_booking = response.json()
 
     # Validate response against schema
@@ -47,9 +53,8 @@ def test_delete_booking_via_api(booking_service, booking_data, bookings_page, va
     # Open UI
     bookings_page.reload()
 
-    # Verify new booking appears
-    bookings_page.get_booking_data_by_id(new_booking["id"])
-    assert bookings_page.get_booking_data_by_id(new_booking["id"]) is not None
+    # Verify new booking appears on page
+    expect(bookings_page.get_booking_row_by_id(new_booking["id"])).to_be_visible()
 
     # Delete via API
     booking_service.delete_booking(new_booking["id"])

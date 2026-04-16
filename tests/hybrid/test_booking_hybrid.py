@@ -63,8 +63,8 @@ def test_delete_booking_via_api(booking_service, booking_data, bookings_page, va
 
         bookings_page.reload()
 
-        # Verify deleted booking no longer appears on page
-        expect(bookings_page.get_booking_row_by_id(new_booking_id)).not_to_be_visible(timeout=5000)
+        # Verify deleted booking no longer appears on page (not just hidden)
+        assert not bookings_page.booking_row_is_present(new_booking_id)
     finally:
         try:
             # cleanup in case fail before delete

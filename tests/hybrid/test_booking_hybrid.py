@@ -17,12 +17,12 @@ def test_create_booking_via_api(booking_service, booking_data, bookings_page, va
     # Validate response against schema
     validate_booking(api_response_new_booking)
 
-    # Open UI
+    #reload UI to ensure it reflects latest data
     bookings_page.reload()
 
     # Verify new booking appears on page and data matches API response using UI
     try:
-        expect(bookings_page.get_booking_row_by_id(api_response_new_booking["id"])).to_be_visible(timeout=5000)
+        bookings_page.wait_for_booking(api_response_new_booking["id"])
         bookings_page_new_booking = bookings_page.get_booking_data_by_id(api_response_new_booking["id"])
         assert bookings_page_new_booking is not None
         assert_booking_data(api_response_new_booking, bookings_page_new_booking)

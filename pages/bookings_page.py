@@ -1,4 +1,4 @@
-from playwright.sync_api import Locator, Page
+from playwright.sync_api import Locator, Page, expect
 
 from config import UI_BASE_URL
 
@@ -100,4 +100,8 @@ class BookingsPage():
     
     def delete_last_booking(self):
         self.last_booking_delete_button_locator.click()
+
+    def wait_for_booking(self, booking_id: int, timeout: int = 5000):
+        booking_row = self.get_booking_row_by_id(booking_id)
+        expect(booking_row).to_be_visible(timeout=timeout)
         

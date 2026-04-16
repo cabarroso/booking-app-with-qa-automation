@@ -21,6 +21,9 @@ def test_create_booking_via_api(booking_service, booking_data, bookings_page, va
     #reload UI to ensure it reflects latest data
     bookings_page.reload()
 
+    # Log creation for CI visibility
+    print(f"[STEP] Created booking ID={api_response_new_booking['id']}")
+
     # Verify new booking appears on page and data matches API response using UI
     try:
         bookings_page.wait_for_booking(api_response_new_booking["id"])
@@ -33,6 +36,8 @@ def test_create_booking_via_api(booking_service, booking_data, bookings_page, va
         cleanup_response = booking_service.delete_booking(api_response_new_booking["id"])
         if cleanup_response.status_code not in [204, 404]:
             raise Exception("Cleanup failed")
+        # log cleanup for CI visibility
+        print(f"[STEP] Cleaned up booking ID={api_response_new_booking['id']}")
 
 # Idea: to create a booking via API, verify it appears in the UI, then delete via API and verify it no longer appears in the UI
 @pytest.mark.hybrid
@@ -54,6 +59,9 @@ def test_delete_booking_via_api(booking_service, booking_data, bookings_page, va
     # Open UI
     bookings_page.reload()
 
+    # log creation for CI visibility
+    print(f"[STEP] Created booking ID={new_booking_id}")
+
     try:
         # Verify new booking appears on page
         bookings_page.wait_for_booking(new_booking_id)
@@ -74,6 +82,8 @@ def test_delete_booking_via_api(booking_service, booking_data, bookings_page, va
         try:
             # cleanup in case fail before delete
             booking_service.delete_booking(new_booking_id)
+            # log cleanup for CI visibility
+            print(f"[STEP] Cleaned up booking ID={new_booking_id}")
         except Exception:
             pass
 

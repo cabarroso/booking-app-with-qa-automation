@@ -21,21 +21,22 @@ def test_create_booking_via_api(booking_service, booking_data, bookings_page, va
     bookings_page.reload()
 
     # Verify new booking appears on page and data matches API response using UI
-    expect(bookings_page.get_booking_row_by_id(api_response_new_booking["id"])).to_be_visible()
-    bookings_page_new_booking = bookings_page.get_booking_data_by_id(api_response_new_booking["id"])
-    assert bookings_page_new_booking is not None
-    assert bookings_page_new_booking["first_name"] == api_response_new_booking["first_name"]
-    assert bookings_page_new_booking["last_name"] == api_response_new_booking["last_name"]
-    assert bookings_page_new_booking["total_price"] == api_response_new_booking["total_price"]
-    assert bookings_page_new_booking["deposit_paid"] == api_response_new_booking["deposit_paid"]
-    assert bookings_page_new_booking["check_in"] == api_response_new_booking["check_in"]
-    assert bookings_page_new_booking["check_out"] == api_response_new_booking["check_out"]
-    assert bookings_page_new_booking["additional_needs"] == api_response_new_booking["additional_needs"]
+    try:
+        expect(bookings_page.get_booking_row_by_id(api_response_new_booking["id"])).to_be_visible()
+        bookings_page_new_booking = bookings_page.get_booking_data_by_id(api_response_new_booking["id"])
+        assert bookings_page_new_booking is not None
+        assert bookings_page_new_booking["first_name"] == api_response_new_booking["first_name"]
+        assert bookings_page_new_booking["last_name"] == api_response_new_booking["last_name"]
+        assert bookings_page_new_booking["total_price"] == api_response_new_booking["total_price"]
+        assert bookings_page_new_booking["deposit_paid"] == api_response_new_booking["deposit_paid"]
+        assert bookings_page_new_booking["check_in"] == api_response_new_booking["check_in"]
+        assert bookings_page_new_booking["check_out"] == api_response_new_booking["check_out"]
+        assert bookings_page_new_booking["additional_needs"] == api_response_new_booking["additional_needs"]
+    finally:
+        # cleanup
+        booking_service.delete_booking(api_response_new_booking["id"])
 
-
-    # cleanup
-    booking_service.delete_booking(api_response_new_booking["id"])
-
+# Idea: to create a booking via API, verify it appears in the UI, then delete via API and verify it no longer appears in the UI
 @pytest.mark.hybrid
 @pytest.mark.booking
 @pytest.mark.delete

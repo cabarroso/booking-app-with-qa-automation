@@ -648,3 +648,17 @@
 2026-04-16 07:16:55,040 | booking_service | INFO | [req: ed0c3e82] REQUEST DELETE /bookings/10
 2026-04-16 07:16:57,081 | booking_service | INFO | [req: ed0c3e82] RESPONSE DELETE /bookings/10 | 204 | 2.041s
 2026-04-16 07:16:57,081 | booking_service | INFO | [req: ed0c3e82] RESPONSE BODY: 
+2026-04-16 07:26:29,871 | booking_service | INFO | [req: 5a78fbc6] REQUEST POST /bookings
+2026-04-16 07:26:29,871 | booking_service | INFO | [req: 5a78fbc6] PAYLOAD: {'first_name': 'John', 'last_name': 'Cisneros', 'total_price': 70, 'deposit_paid': False, 'check_in': '2026-04-30', 'check_out': '2026-06-05', 'additional_needs': 'quite'}
+2026-04-16 07:26:31,895 | booking_service | INFO | [req: 5a78fbc6] RESPONSE POST /bookings | 201 | 2.024s
+2026-04-16 07:26:31,895 | booking_service | INFO | [req: 5a78fbc6] RESPONSE BODY: {'first_name': 'John', 'last_name': 'Cisneros', 'total_price': 70, 'deposit_paid': False, 'check_in': '2026-04-30', 'check_out': '2026-06-05', 'additional_needs': 'quite', 'id': 10}
+2026-04-16 07:26:32,029 | booking_service | INFO | [req: 20bbc3dc] REQUEST DELETE /bookings/10
+2026-04-16 07:26:34,060 | booking_service | INFO | [req: 20bbc3dc] RESPONSE DELETE /bookings/10 | 204 | 2.031s
+2026-04-16 07:26:34,060 | booking_service | INFO | [req: 20bbc3dc] RESPONSE BODY: 
+2026-04-16 07:26:35,239 | booking_service | INFO | [req: 533a9735] REQUEST POST /bookings
+2026-04-16 07:26:35,239 | booking_service | INFO | [req: 533a9735] PAYLOAD: {'first_name': 'Alexander', 'last_name': 'Tucker', 'total_price': 207, 'deposit_paid': True, 'check_in': '2026-05-02', 'check_out': '2026-05-27', 'additional_needs': 'behavior'}
+2026-04-16 07:26:37,276 | booking_service | INFO | [req: 533a9735] RESPONSE POST /bookings | 201 | 2.037s
+2026-04-16 07:26:37,276 | booking_service | INFO | [req: 533a9735] RESPONSE BODY: {'first_name': 'Alexander', 'last_name': 'Tucker', 'total_price': 207, 'deposit_paid': True, 'check_in': '2026-05-02', 'check_out': '2026-05-27', 'additional_needs': 'behavior', 'id': 10}
+2026-04-16 07:26:37,331 | booking_service | INFO | [req: bcc5ca72] REQUEST DELETE /bookings/10
+2026-04-16 07:26:39,377 | booking_service | INFO | [req: bcc5ca72] RESPONSE DELETE /bookings/10 | 204 | 2.046s
+2026-04-16 07:26:39,377 | booking_service | INFO | [req: bcc5ca72] RESPONSE BODY: 

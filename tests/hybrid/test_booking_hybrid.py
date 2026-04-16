@@ -10,9 +10,10 @@ def test_create_booking_via_api(booking_service, booking_data, bookings_page, va
     # Create booking via API
     response = booking_service.create_booking(booking_data)
 
+    # Verify API response and data matches what we sent
     assert response.status_code == 201
-
     api_response_new_booking = response.json()
+    assert_booking_data_matches(booking_data, api_response_new_booking)
 
     # Validate response against schema
     validate_booking(api_response_new_booking)
@@ -25,7 +26,7 @@ def test_create_booking_via_api(booking_service, booking_data, bookings_page, va
         bookings_page.wait_for_booking(api_response_new_booking["id"])
         bookings_page_new_booking = bookings_page.get_booking_data_by_id(api_response_new_booking["id"])
         assert bookings_page_new_booking is not None
-        assert_booking_data(api_response_new_booking, bookings_page_new_booking)
+        assert_booking_data_matches(api_response_new_booking, bookings_page_new_booking)
         
     finally:
         # cleanup
@@ -40,9 +41,11 @@ def test_create_booking_via_api(booking_service, booking_data, bookings_page, va
 def test_delete_booking_via_api(booking_service, booking_data, bookings_page, validate_booking):
     # Create booking via API
     response = booking_service.create_booking(booking_data)
-    assert response.status_code == 201
 
+    # Verify API response and data matches what we sent
+    assert response.status_code == 201
     new_booking = response.json()
+    assert_booking_data_matches(booking_data, new_booking)
 
     # Validate response against schema
     validate_booking(new_booking)
@@ -74,12 +77,12 @@ def test_delete_booking_via_api(booking_service, booking_data, bookings_page, va
         except Exception:
             pass
 
-# helper function to compare booking data from API and UI
-def assert_booking_data(api_booking, ui_booking):
-    assert api_booking["first_name"] == ui_booking["first_name"]
-    assert api_booking["last_name"] == ui_booking["last_name"]
-    assert api_booking["total_price"] == ui_booking["total_price"]
-    assert api_booking["deposit_paid"] == ui_booking["deposit_paid"]
-    assert api_booking["check_in"] == ui_booking["check_in"]
-    assert api_booking["check_out"] == ui_booking["check_out"]
-    assert api_booking["additional_needs"] == ui_booking["additional_needs"]
+# helper function to compare and assert booking data matches
+def assert_booking_data_matches(booking_data1, booking_data2):
+    assert booking_data1["first_name"] == booking_data2["first_name"]
+    assert booking_data1["last_name"] == booking_data2["last_name"]
+    assert booking_data1["total_price"] == booking_data2["total_price"]
+    assert booking_data1["deposit_paid"] == booking_data2["deposit_paid"]
+    assert booking_data1["check_in"] == booking_data2["check_in"]
+    assert booking_data1["check_out"] == booking_data2["check_out"]
+    assert booking_data1["additional_needs"] == booking_data2["additional_needs"]

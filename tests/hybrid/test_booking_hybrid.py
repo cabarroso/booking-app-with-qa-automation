@@ -25,13 +25,8 @@ def test_create_booking_via_api(booking_service, booking_data, bookings_page, va
         expect(bookings_page.get_booking_row_by_id(api_response_new_booking["id"])).to_be_visible()
         bookings_page_new_booking = bookings_page.get_booking_data_by_id(api_response_new_booking["id"])
         assert bookings_page_new_booking is not None
-        assert bookings_page_new_booking["first_name"] == api_response_new_booking["first_name"]
-        assert bookings_page_new_booking["last_name"] == api_response_new_booking["last_name"]
-        assert bookings_page_new_booking["total_price"] == api_response_new_booking["total_price"]
-        assert bookings_page_new_booking["deposit_paid"] == api_response_new_booking["deposit_paid"]
-        assert bookings_page_new_booking["check_in"] == api_response_new_booking["check_in"]
-        assert bookings_page_new_booking["check_out"] == api_response_new_booking["check_out"]
-        assert bookings_page_new_booking["additional_needs"] == api_response_new_booking["additional_needs"]
+        assert_booking_data(api_response_new_booking, bookings_page_new_booking)
+        
     finally:
         # cleanup
         booking_service.delete_booking(api_response_new_booking["id"])
@@ -63,3 +58,13 @@ def test_delete_booking_via_api(booking_service, booking_data, bookings_page, va
 
     # Verify deleted booking no longer appears on page
     expect(bookings_page.get_booking_row_by_id(new_booking["id"])).not_to_be_visible()
+
+# helper function to compare booking data from API and UI
+def assert_booking_data(api_booking, ui_booking):
+    assert api_booking["first_name"] == ui_booking["first_name"]
+    assert api_booking["last_name"] == ui_booking["last_name"]
+    assert api_booking["total_price"] == ui_booking["total_price"]
+    assert api_booking["deposit_paid"] == ui_booking["deposit_paid"]
+    assert api_booking["check_in"] == ui_booking["check_in"]
+    assert api_booking["check_out"] == ui_booking["check_out"]
+    assert api_booking["additional_needs"] == ui_booking["additional_needs"]

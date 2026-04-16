@@ -57,13 +57,20 @@ def test_delete_booking_via_api(booking_service, booking_data, bookings_page, va
         delete_response = booking_service.delete_booking(new_booking["id"])
         assert delete_response.status_code == 204
 
+        # Verify booking is deleted via API
+        get_response = booking_service.get_booking(new_booking["id"])
+        assert get_response.status_code == 404
+
         bookings_page.reload()
 
         # Verify deleted booking no longer appears on page
         expect(bookings_page.get_booking_row_by_id(new_booking["id"])).not_to_be_visible()
     finally:
-        # cleanup in case fail before delete
-        booking_service.delete_booking(new_booking["id"])
+        try:
+            # cleanup in case fail before delete
+            booking_service.delete_booking(new_booking["id"])
+        except Exception:
+            pass
 
 # helper function to compare booking data from API and UI
 def assert_booking_data(api_booking, ui_booking):

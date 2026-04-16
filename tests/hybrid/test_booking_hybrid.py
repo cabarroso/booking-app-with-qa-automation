@@ -44,30 +44,31 @@ def test_delete_booking_via_api(booking_service, booking_data, bookings_page, va
 
     # Validate response against schema
     validate_booking(new_booking)
+    new_booking_id = new_booking["id"]
 
     # Open UI
     bookings_page.reload()
 
     try:
         # Verify new booking appears on page
-        expect(bookings_page.get_booking_row_by_id(new_booking["id"])).to_be_visible(timeout=5000)
+        bookings_page.wait_for_booking(new_booking_id)
 
         # Delete via API
-        delete_response = booking_service.delete_booking(new_booking["id"])
+        delete_response = booking_service.delete_booking(new_booking_id)
         assert delete_response.status_code == 204
 
         # Verify booking is deleted via API
-        get_response = booking_service.get_booking(new_booking["id"])
+        get_response = booking_service.get_booking(new_booking_id)
         assert get_response.status_code == 404
 
         bookings_page.reload()
 
         # Verify deleted booking no longer appears on page
-        expect(bookings_page.get_booking_row_by_id(new_booking["id"])).not_to_be_visible(timeout=5000)
+        expect(bookings_page.get_booking_row_by_id(new_booking_id)).not_to_be_visible(timeout=5000)
     finally:
         try:
             # cleanup in case fail before delete
-            booking_service.delete_booking(new_booking["id"])
+            booking_service.delete_booking(new_booking_id)
         except Exception:
             pass
 

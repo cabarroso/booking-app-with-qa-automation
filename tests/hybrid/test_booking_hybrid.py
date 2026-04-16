@@ -29,7 +29,9 @@ def test_create_booking_via_api(booking_service, booking_data, bookings_page, va
         
     finally:
         # cleanup
-        booking_service.delete_booking(api_response_new_booking["id"])
+        cleanup_response = booking_service.delete_booking(api_response_new_booking["id"])
+        if cleanup_response.status_code not in [204, 404]:
+            raise Exception("Cleanup failed")
 
 # Idea: to create a booking via API, verify it appears in the UI, then delete via API and verify it no longer appears in the UI
 @pytest.mark.hybrid

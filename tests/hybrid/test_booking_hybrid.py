@@ -7,7 +7,7 @@ from framework.utils.helpers import assert_booking_data_matches
 @pytest.mark.hybrid
 @pytest.mark.booking
 @pytest.mark.create
-def test_create_booking_via_api(created_booking, bookings_page, validate_booking):
+def test_create_booking_via_api(created_booking, booking_service, bookings_page, validate_booking):
     new_booking = created_booking["response_data"]
 
     # Validate response against schema
@@ -16,7 +16,11 @@ def test_create_booking_via_api(created_booking, bookings_page, validate_booking
     # Verify request and response data match for create booking API call
     assert_booking_data_matches(created_booking["request_data"], new_booking)
 
-    # MAIN TEST STEPS START HERE - VERIFY APPEARANCE IN UI AND DATA MATCHES
+    # Verify booking is retrievable via API
+    get_response = booking_service.get_booking(new_booking["id"])
+    assert get_response.status_code == 200
+    get_data = get_response.json()
+    assert_booking_data_matches(new_booking, get_data)
 
     # Verify new booking apears on page
     bookings_page.wait_for_booking_row(new_booking["id"])
@@ -40,6 +44,12 @@ def test_delete_booking_via_api(created_booking, booking_service, bookings_page,
 
     # Verify request and response data match for create booking API call
     assert_booking_data_matches(created_booking["request_data"], new_booking)
+
+    # Verify booking is retrievable via API
+    get_response = booking_service.get_booking(new_booking["id"])
+    assert get_response.status_code == 200
+    get_data = get_response.json()
+    assert_booking_data_matches(new_booking, get_data)
 
     # MAIN TEST STEPS START HERE - DELETE AND VERIFY DISAPPEARANCE
     new_booking_id = new_booking["id"]

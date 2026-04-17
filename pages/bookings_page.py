@@ -104,6 +104,10 @@ class BookingsPage():
     def wait_for_booking_row(self, booking_id: int, timeout: int = 5000):
         booking_row = self.get_booking_row_by_id(booking_id)
         expect(booking_row).to_be_visible(timeout=timeout)
+
+    def wait_for_booking_row_absence(self, booking_id: int, timeout: int = 5000):
+        booking_row = self.get_booking_row_by_id(booking_id)
+        expect(booking_row).not_to_be_visible(timeout=timeout)
         
     def booking_row_is_present(self, booking_id: int) -> bool:
         return self.get_booking_row_by_id(booking_id).count() > 0

@@ -58,7 +58,10 @@ def test_delete_booking_via_api(created_booking, booking_service, bookings_page,
     # Update page
     bookings_page.reload()
 
-    # Verify deleted booking no longer appears on page (not just hidden)
+    # Verify booking row disappears from UI
+    bookings_page.wait_for_booking_row_absence(new_booking_id)
+
+    # Verify deleted booking is completely gone (not just hidden)
     assert not bookings_page.booking_row_is_present(new_booking_id)
 
 

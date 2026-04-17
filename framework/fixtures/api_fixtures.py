@@ -5,7 +5,8 @@ import pytest
 from framework.services.booking_service import BookingService
 from framework.utils.data_generator import generate_booking_data
 from framework.services.auth_service import AuthService
-from tests.hybrid.test_booking_hybrid import assert_booking_data_matches
+from framework.utils.helpers import assert_booking_data_matches
+
 
 @pytest.fixture
 def booking_service() -> BookingService:

@@ -1104,3 +1104,43 @@
 2026-04-16 15:04:55,024 | booking_service | INFO | [req: 0481fb66] REQUEST DELETE /bookings/10
 2026-04-16 15:04:57,062 | booking_service | ERROR | [req: 0481fb66] RESPONSE DELETE /bookings/10 | 404 | 2.038s
 2026-04-16 15:04:57,062 | booking_service | ERROR | [req: 0481fb66] RESPONSE BODY: {'detail': 'Booking not found'}
+2026-04-16 16:58:03,369 | booking_service | INFO | [req: 01d567af] REQUEST POST /bookings
+2026-04-16 16:58:03,369 | booking_service | INFO | [req: 01d567af] PAYLOAD: {'first_name': 'John', 'last_name': 'Martin', 'total_price': 424, 'deposit_paid': True, 'check_in': '2026-05-10', 'check_out': '2026-06-02', 'additional_needs': 'soon'}
+2026-04-16 16:58:05,428 | booking_service | INFO | [req: 01d567af] RESPONSE POST /bookings | 201 | 2.059s
+2026-04-16 16:58:05,428 | booking_service | INFO | [req: 01d567af] RESPONSE BODY: {'first_name': 'John', 'last_name': 'Martin', 'total_price': 424, 'deposit_paid': True, 'check_in': '2026-05-10', 'check_out': '2026-06-02', 'additional_needs': 'soon', 'id': 10}
+2026-04-16 16:58:06,820 | booking_service | INFO | [req: 95f2c2de] REQUEST DELETE /bookings/10
+2026-04-16 16:58:08,861 | booking_service | INFO | [req: 95f2c2de] RESPONSE DELETE /bookings/10 | 204 | 2.041s
+2026-04-16 16:58:08,861 | booking_service | INFO | [req: 95f2c2de] RESPONSE BODY: 
+2026-04-16 16:58:08,863 | booking_service | INFO | [req: 99461287] REQUEST POST /bookings
+2026-04-16 16:58:08,863 | booking_service | INFO | [req: 99461287] PAYLOAD: {'first_name': 'Greg', 'last_name': 'Cortez', 'total_price': 419, 'deposit_paid': True, 'check_in': '2026-05-03', 'check_out': '2026-05-21', 'additional_needs': 'this'}
+2026-04-16 16:58:10,907 | booking_service | INFO | [req: 99461287] RESPONSE POST /bookings | 201 | 2.043s
+2026-04-16 16:58:10,907 | booking_service | INFO | [req: 99461287] RESPONSE BODY: {'first_name': 'Greg', 'last_name': 'Cortez', 'total_price': 419, 'deposit_paid': True, 'check_in': '2026-05-03', 'check_out': '2026-05-21', 'additional_needs': 'this', 'id': 10}
+2026-04-16 16:58:12,089 | booking_service | INFO | [req: 7ff18fcb] REQUEST DELETE /bookings/10
+2026-04-16 16:58:14,144 | booking_service | INFO | [req: 7ff18fcb] RESPONSE DELETE /bookings/10 | 204 | 2.054s
+2026-04-16 16:58:14,144 | booking_service | INFO | [req: 7ff18fcb] RESPONSE BODY: 
+2026-04-16 16:58:14,144 | booking_service | INFO | [req: 89a7dcff] REQUEST GET /bookings/10
+2026-04-16 16:58:16,191 | booking_service | ERROR | [req: 89a7dcff] RESPONSE GET /bookings/10 | 404 | 2.047s
+2026-04-16 16:58:16,191 | booking_service | ERROR | [req: 89a7dcff] RESPONSE BODY: {'detail': 'Booking not found'}
+2026-04-16 16:58:16,263 | booking_service | INFO | [req: 4d1dcef2] REQUEST DELETE /bookings/10
+2026-04-16 16:58:18,296 | booking_service | ERROR | [req: 4d1dcef2] RESPONSE DELETE /bookings/10 | 404 | 2.033s
+2026-04-16 16:58:18,296 | booking_service | ERROR | [req: 4d1dcef2] RESPONSE BODY: {'detail': 'Booking not found'}
+2026-04-16 17:01:07,823 | booking_service | INFO | [req: e58383ef] REQUEST POST /bookings
+2026-04-16 17:01:07,824 | booking_service | INFO | [req: e58383ef] PAYLOAD: {'first_name': 'Joshua', 'last_name': 'Williams', 'total_price': 321, 'deposit_paid': False, 'check_in': '2026-05-13', 'check_out': '2026-06-07', 'additional_needs': 'rule'}
+2026-04-16 17:01:09,875 | booking_service | INFO | [req: e58383ef] RESPONSE POST /bookings | 201 | 2.051s
+2026-04-16 17:01:09,875 | booking_service | INFO | [req: e58383ef] RESPONSE BODY: {'first_name': 'Joshua', 'last_name': 'Williams', 'total_price': 321, 'deposit_paid': False, 'check_in': '2026-05-13', 'check_out': '2026-06-07', 'additional_needs': 'rule', 'id': 10}
+2026-04-16 17:01:11,115 | booking_service | INFO | [req: cfc71782] REQUEST DELETE /bookings/10
+2026-04-16 17:01:13,156 | booking_service | INFO | [req: cfc71782] RESPONSE DELETE /bookings/10 | 204 | 2.041s
+2026-04-16 17:01:13,156 | booking_service | INFO | [req: cfc71782] RESPONSE BODY: 
+2026-04-16 17:01:13,158 | booking_service | INFO | [req: baa487fb] REQUEST POST /bookings
+2026-04-16 17:01:13,159 | booking_service | INFO | [req: baa487fb] PAYLOAD: {'first_name': 'Tyler', 'last_name': 'Rivera', 'total_price': 322, 'deposit_paid': True, 'check_in': '2026-04-26', 'check_out': '2026-06-14', 'additional_needs': 'southern'}
+2026-04-16 17:01:15,192 | booking_service | INFO | [req: baa487fb] RESPONSE POST /bookings | 201 | 2.033s
+2026-04-16 17:01:15,192 | booking_service | INFO | [req: baa487fb] RESPONSE BODY: {'first_name': 'Tyler', 'last_name': 'Rivera', 'total_price': 322, 'deposit_paid': True, 'check_in': '2026-04-26', 'check_out': '2026-06-14', 'additional_needs': 'southern', 'id': 10}
+2026-04-16 17:01:16,361 | booking_service | INFO | [req: 26ea5750] REQUEST DELETE /bookings/10
+2026-04-16 17:01:18,405 | booking_service | INFO | [req: 26ea5750] RESPONSE DELETE /bookings/10 | 204 | 2.044s
+2026-04-16 17:01:18,405 | booking_service | INFO | [req: 26ea5750] RESPONSE BODY: 
+2026-04-16 17:01:18,405 | booking_service | INFO | [req: dde223ca] REQUEST GET /bookings/10
+2026-04-16 17:01:20,455 | booking_service | ERROR | [req: dde223ca] RESPONSE GET /bookings/10 | 404 | 2.050s
+2026-04-16 17:01:20,456 | booking_service | ERROR | [req: dde223ca] RESPONSE BODY: {'detail': 'Booking not found'}
+2026-04-16 17:01:20,520 | booking_service | INFO | [req: 295178a4] REQUEST DELETE /bookings/10
+2026-04-16 17:01:22,554 | booking_service | ERROR | [req: 295178a4] RESPONSE DELETE /bookings/10 | 404 | 2.034s
+2026-04-16 17:01:22,554 | booking_service | ERROR | [req: 295178a4] RESPONSE BODY: {'detail': 'Booking not found'}

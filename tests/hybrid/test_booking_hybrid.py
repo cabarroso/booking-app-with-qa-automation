@@ -1,6 +1,8 @@
 import pytest
 from playwright.sync_api import expect
 
+from framework.utils.helpers import assert_booking_data_matches
+
 # Idea: to create a booking via API and verify it appears in the UI, then cleanup
 @pytest.mark.hybrid
 @pytest.mark.booking
@@ -39,12 +41,4 @@ def test_delete_booking_via_api(new_booking, booking_service, bookings_page):
     # Verify deleted booking no longer appears on page (not just hidden)
     assert not bookings_page.booking_row_is_present(new_booking_id)
 
-# helper function to compare and assert booking data matches
-def assert_booking_data_matches(booking_data1, booking_data2):
-    assert booking_data1["first_name"] == booking_data2["first_name"]
-    assert booking_data1["last_name"] == booking_data2["last_name"]
-    assert booking_data1["total_price"] == booking_data2["total_price"]
-    assert booking_data1["deposit_paid"] == booking_data2["deposit_paid"]
-    assert booking_data1["check_in"] == booking_data2["check_in"]
-    assert booking_data1["check_out"] == booking_data2["check_out"]
-    assert booking_data1["additional_needs"] == booking_data2["additional_needs"]
+

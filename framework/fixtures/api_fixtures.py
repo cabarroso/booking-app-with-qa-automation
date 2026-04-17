@@ -5,7 +5,6 @@ import pytest
 from framework.services.booking_service import BookingService
 from framework.utils.data_generator import generate_booking_data
 from framework.services.auth_service import AuthService
-from framework.utils.helpers import assert_booking_data_matches
 
 
 @pytest.fixture
@@ -40,26 +39,25 @@ def valid_login_credentials():
     }
 
 @pytest.fixture
-def new_booking(booking_service: BookingService, booking_data: dict, validate_booking) -> Generator[dict, None, None]:
+def created_booking(booking_service: BookingService, booking_data: dict, validate_booking) -> Generator[dict, None, None]:
     # Create booking via API
     response = booking_service.create_booking(booking_data)
 
-    # Verify API response and data matches what we sent
-    assert response.status_code == 201
-    new_booking = response.json()
-    assert_booking_data_matches(booking_data, new_booking)
-
-    # Validate response against schema
-    validate_booking(new_booking)
+    if response.status_code != 201:
+        pytest.fail(f"Booking creation failed with status code {response.status_code}")
 
     # Log creation for CI visibility
-    print(f"[STEP] Created booking ID={new_booking["id"]}")
+    new_booking = response.json()
+    print(f"[SETUP] Created booking ID={new_booking['id']}")
 
-    yield new_booking
+    yield {
+        "request_data": booking_data,
+        "response_data": new_booking
+    }
 
     # Cleanup
     cleanup_response = booking_service.delete_booking(new_booking["id"])
     if cleanup_response.status_code not in [204, 404]:
-        raise Exception("Cleanup failed")
+        pytest.fail(f"Cleanup failed for booking ID={new_booking['id']} with status code {cleanup_response.status_code}")
     # log cleanup for CI visibility
-    print(f"[STEP] Cleaned up booking ID={new_booking["id"]}")
+    print(f"[TEARDOWN] Deleted booking ID={new_booking['id']}")

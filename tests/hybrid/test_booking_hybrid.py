@@ -7,21 +7,41 @@ from framework.utils.helpers import assert_booking_data_matches
 @pytest.mark.hybrid
 @pytest.mark.booking
 @pytest.mark.create
-def test_create_booking_via_api(new_booking, bookings_page):
+def test_create_booking_via_api(created_booking, bookings_page, validate_booking):
+    new_booking = created_booking["response_data"]
+
+    # Validate response against schema
+    validate_booking(new_booking)
+
+    # Verify request and response data match for create booking API call
+    assert_booking_data_matches(created_booking["request_data"], new_booking)
+
+    # MAIN TEST STEPS START HERE - VERIFY APPEARANCE IN UI AND DATA MATCHES
+
     # Verify new booking apears on page
     bookings_page.wait_for_booking_row(new_booking["id"])
 
-    ui_booking_data = bookings_page.get_booking_data_by_id(new_booking["id"])
-    assert ui_booking_data is not None
+    # Get booking data from UI
+    ui_new_booking_data = bookings_page.get_booking_data_by_id(new_booking["id"])
+    assert ui_new_booking_data is not None
 
     # Verify data shown on UI matches API response
-    assert_booking_data_matches(new_booking, ui_booking_data)
+    assert_booking_data_matches(new_booking, ui_new_booking_data)
 
 # Idea: to create a booking via API, verify it appears in the UI, then delete via API and verify it no longer appears in the UI
 @pytest.mark.hybrid
 @pytest.mark.booking
 @pytest.mark.delete
-def test_delete_booking_via_api(new_booking, booking_service, bookings_page):
+def test_delete_booking_via_api(created_booking, booking_service, bookings_page, validate_booking):
+    new_booking = created_booking["response_data"]
+
+    # Validate response against schema
+    validate_booking(new_booking)
+
+    # Verify request and response data match for create booking API call
+    assert_booking_data_matches(created_booking["request_data"], new_booking)
+
+    # MAIN TEST STEPS START HERE - DELETE AND VERIFY DISAPPEARANCE
     new_booking_id = new_booking["id"]
 
     # Verify new booking appears on page

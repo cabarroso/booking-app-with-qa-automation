@@ -1,25 +1,42 @@
 import pytest
 
-@pytest.mark.smoke
-@pytest.mark.delete_booking
-def test_delete_booking_status(booking_service, last_booking_id):
-    response = booking_service.delete_booking(last_booking_id)
+from framework.utils.helpers import assert_booking_data_matches
 
-    assert response.status_code == 204
+@pytest.mark.delete
+@pytest.mark.api
+def test_delete_booking_removes_booking(booking_service, created_booking, validate_booking):
+    # SETUP - create a booking to delete
+    new_booking = created_booking["response_data"]
 
-@pytest.mark.delete_booking
-def test_delete_booking(booking_service, last_booking_id):
-    response = booking_service.get_booking(last_booking_id)
-    assert response.status_code == 200
+    validate_booking(new_booking)
 
-    booking_service.delete_booking(last_booking_id)
-
-    response = booking_service.get_booking(last_booking_id)
-    assert response.status_code == 404
+    assert_booking_data_matches(created_booking["request_data"], new_booking)
 
 
-@pytest.mark.delete_booking
-def test_delete_booking_id_doesnt_exist(booking_service, last_booking_id):
-    response = booking_service.delete_booking(last_booking_id + 1)
+    # MAIN TESTS - delete the booking and verify it no longer exists
+    new_booking_id = new_booking["id"]
 
-    assert response.status_code == 404
+    pre_delete_response = booking_service.get_booking(new_booking_id)
+    assert pre_delete_response.status_code == 200
+
+    assert_booking_data_matches(new_booking, pre_delete_response.json())
+
+    delete_response = booking_service.delete_booking(new_booking_id)
+    assert delete_response.status_code == 204
+    assert delete_response.text == ""
+
+    post_delete_response = booking_service.get_booking(new_booking_id)
+    assert post_delete_response.status_code == 404
+
+
+@pytest.mark.delete
+@pytest.mark.api
+def test_delete_booking_invalid_id_returns_404(booking_service):
+    # MAIN TEST - attempt to delete a non-existent booking and verify 404 response
+    get_response = booking_service.get_booking(0)
+    assert get_response.status_code == 404
+
+    delete_response = booking_service.delete_booking(0)
+    assert delete_response.status_code == 404
+
+    assert delete_response.json() == {"detail": "Booking not found"}

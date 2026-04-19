@@ -39,7 +39,7 @@ def valid_login_credentials():
     }
 
 @pytest.fixture
-def created_booking(booking_service: BookingService, booking_data: dict, validate_booking) -> Generator[dict, None, None]:
+def created_booking(booking_service: BookingService, booking_data: dict) -> Generator[dict, None, None]:
     # Create booking via API
     response = booking_service.create_booking(booking_data)
 

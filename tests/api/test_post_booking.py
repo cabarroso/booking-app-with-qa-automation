@@ -4,14 +4,18 @@ from framework.utils.data_generator import generate_booking_data
 import pytest
 
 @pytest.mark.smoke
-@pytest.mark.post_booking
+@pytest.mark.post
+@pytest.mark.booking
+@pytest.mark.api
 def test_post_booking_status(booking_service, booking_data):
     response = booking_service.create_booking(booking_data)
 
     # status code
     assert response.status_code == 201
 
-@pytest.mark.post_booking
+@pytest.mark.post
+@pytest.mark.booking
+@pytest.mark.api
 def test_post_booking(booking_service, booking_data, validate_booking):
     response = booking_service.create_booking(booking_data)
 
@@ -32,7 +36,9 @@ def test_post_booking(booking_service, booking_data, validate_booking):
     assert response_data["check_out"] == booking_data["check_out"]
     assert response_data["additional_needs"] == booking_data["additional_needs"]
 
-@pytest.mark.post_booking
+@pytest.mark.post
+@pytest.mark.booking
+@pytest.mark.api
 @pytest.mark.parametrize("field", ["first_name", "total_price", "check_in"])
 def test_missing_field(booking_service, booking_data, field):
     del booking_data[field]
@@ -41,7 +47,9 @@ def test_missing_field(booking_service, booking_data, field):
 
     assert response.status_code == 422
 
-@pytest.mark.post_booking
+@pytest.mark.post
+@pytest.mark.booking
+@pytest.mark.api
 @pytest.mark.parametrize("field, value", 
                         [("first_name", 1337), 
                          ("total_price", "fifty"), 
@@ -55,8 +63,9 @@ def test_invalid_value_type(booking_service, booking_data, field, value):
 
     assert response.status_code == 422
 
-@pytest.mark.post_booking
-@pytest.mark.error
+@pytest.mark.post
+@pytest.mark.booking
+@pytest.mark.api
 @pytest.mark.parametrize("field, value", 
                          [
                              ("first_name", "a"*1000),
@@ -71,8 +80,9 @@ def test_large_input(booking_service, booking_data, field, value):
 
     assert response.status_code == 422
 
-@pytest.mark.post_booking
-@pytest.mark.error
+@pytest.mark.post
+@pytest.mark.booking
+@pytest.mark.api
 @pytest.mark.parametrize("field, value", 
                          [
                              ("first_name", ""),
@@ -87,8 +97,9 @@ def test_empty_field(booking_service, booking_data, field, value):
 
     assert response.status_code == 422
 
-@pytest.mark.post_booking
-@pytest.mark.error
+@pytest.mark.post
+@pytest.mark.booking
+@pytest.mark.api
 @pytest.mark.parametrize("field, value", 
                          [
                              ("first_name", "<script>"),

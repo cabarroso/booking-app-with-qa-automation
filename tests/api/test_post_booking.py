@@ -34,6 +34,9 @@ def test_missing_field(booking_service, booking_data, field):
     response = booking_service.create_booking(booking_data)
 
     assert response.status_code == 422
+    fail_response_data = response.json()
+    assert fail_response_data["detail"][0]["msg"] == "Field required"
+    assert fail_response_data["detail"][0]["loc"][-1] == field
 
 @pytest.mark.post
 @pytest.mark.booking

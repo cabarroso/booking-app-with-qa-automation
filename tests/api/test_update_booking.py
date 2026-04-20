@@ -27,8 +27,8 @@ def test_update_booking(created_booking, booking_service, booking_data, validate
 @pytest.mark.booking
 def test_update_booking_id_doesnt_exist(booking_service, booking_data):
     response = booking_service.update_booking(0, booking_data)
-
-    assert response.status_code >= 400
+    assert response.status_code == 404
+    assert response.json() == {"detail": "Booking not found"}
 
 @pytest.mark.put
 @pytest.mark.api
@@ -46,19 +46,21 @@ def test_update_booking_missing_field(created_booking, booking_service, booking_
     del booking_data[field]
 
     response = booking_service.update_booking(new_booking["id"], booking_data)
-
     assert response.status_code == 422
+    put_response_data = response.json()
+    assert put_response_data["detail"][0]["type"] == "missing"
+    assert put_response_data["detail"][0]["loc"][-1] == field
 
 @pytest.mark.put
 @pytest.mark.api
 @pytest.mark.booking
-@pytest.mark.parametrize("field, value", 
-                        [("first_name", 1337),
-                         ("total_price", "fifty dollars"),
-                         ("check_in", 3.14),
-                         ("deposit_paid", "notabool")],
+@pytest.mark.parametrize("field, value, detail_type", 
+                        [("first_name", 1337, "string_type"),
+                         ("total_price", "fifty dollars", "int_parsing"),
+                         ("check_in", 3.14, "date_from_datetime_inexact"),
+                         ("deposit_paid", "notabool", "bool_parsing")],
                         ids=["first_name", "total_price", "check_in", "deposit_paid"])
-def test_update_booking_invalid_value_type(created_booking, booking_service, booking_data, validate_booking, field, value):
+def test_update_booking_invalid_value_type(created_booking, booking_service, booking_data, validate_booking, field, value, detail_type):
     new_booking = created_booking["response_data"]
 
     validate_booking(new_booking)
@@ -70,5 +72,7 @@ def test_update_booking_invalid_value_type(created_booking, booking_service, boo
     booking_data[field] = value
 
     response = booking_service.update_booking(new_booking["id"], booking_data)
-
     assert response.status_code == 422
+    put_response_data = response.json()
+    assert put_response_data["detail"][0]["type"] == detail_type
+    assert put_response_data["detail"][0]["loc"][-1] == field

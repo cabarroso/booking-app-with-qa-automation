@@ -1,10 +1,10 @@
-name: Run API Get Tests
+name: Run API Booking Update Tests
 
 on:
   push:
-    branches: [ fix-api-get-tests ]
+    branches: [ fix-api-update-tests ]
   pull_request:
-    branches: [ fix-api-get-tests ]
+    branches: [ fix-api-update-tests ]
 
 jobs:
   test:
@@ -30,7 +30,7 @@ jobs:
           done
 
       - name: Run tests
-        run: docker compose run --rm tests pytest -m "api and get"
+        run: docker compose run --rm tests pytest -m "api and put"
 
       - name: Shut down
         run: docker compose down

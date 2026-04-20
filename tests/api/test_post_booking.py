@@ -81,32 +81,38 @@ def test_large_input(booking_service, booking_data, field, value, detail_type):
 @pytest.mark.post
 @pytest.mark.booking
 @pytest.mark.api
-@pytest.mark.parametrize("field, value", 
+@pytest.mark.parametrize("field, value, detail_type", 
                          [
-                             ("first_name", ""),
-                             ("last_name", ""),
-                             ("total_price", "")
+                             ("first_name", "", "string_too_short"),
+                             ("last_name", "", "string_too_short"),
+                             ("total_price", "", "int_parsing")
                          ],
                          ids=["first_name", "last_name", "total_price"])
-def test_empty_field(booking_service, booking_data, field, value):
+def test_empty_field(booking_service, booking_data, field, value, detail_type):
     booking_data[field] = value
 
     response = booking_service.create_booking(booking_data)
 
     assert response.status_code == 422
+    fail_response_data = response.json()
+    assert fail_response_data["detail"][0]["type"] == detail_type
+    assert fail_response_data["detail"][0]["loc"][-1] == field
 
 @pytest.mark.post
 @pytest.mark.booking
 @pytest.mark.api
-@pytest.mark.parametrize("field, value", 
+@pytest.mark.parametrize("field, value, detail_type", 
                          [
-                             ("first_name", "<script>"),
-                             ("last_name", "SELECT *")
+                             ("first_name", "<script>", "value_error"),
+                             ("last_name", "SELECT *", "value_error")
                          ],
                          ids=["first_name", "last_name"])
-def test_special_chars(booking_service, booking_data, field, value):
+def test_special_chars(booking_service, booking_data, field, value, detail_type):
     booking_data[field] = value
 
     response = booking_service.create_booking(booking_data)
 
     assert response.status_code == 422
+    fail_response_data = response.json()
+    assert fail_response_data["detail"][0]["type"] == detail_type
+    assert fail_response_data["detail"][0]["loc"][-1] == field

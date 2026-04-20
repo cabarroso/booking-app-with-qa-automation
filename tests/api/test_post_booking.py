@@ -61,19 +61,22 @@ def test_invalid_value_type(booking_service, booking_data, field, value, detail_
 @pytest.mark.post
 @pytest.mark.booking
 @pytest.mark.api
-@pytest.mark.parametrize("field, value", 
+@pytest.mark.parametrize("field, value, detail_type", 
                          [
-                             ("first_name", "a"*1000),
-                             ("last_name", "a"*1000),
-                             ("total_price", 1_000_001)
+                             ("first_name", "a"*1000, "string_too_long"),
+                             ("last_name", "a"*1000, "string_too_long"),
+                             ("total_price", 1_000_001, "less_than_equal")
                          ],
                          ids=["first_name", "last_name", "total_price"])
-def test_large_input(booking_service, booking_data, field, value):
+def test_large_input(booking_service, booking_data, field, value, detail_type):
     booking_data[field] = value
 
     response = booking_service.create_booking(booking_data)
 
     assert response.status_code == 422
+    fail_response_data = response.json()
+    assert fail_response_data["detail"][0]["type"] == detail_type
+    assert fail_response_data["detail"][0]["loc"][-1] == field
 
 @pytest.mark.post
 @pytest.mark.booking

@@ -3,29 +3,26 @@ from framework.utils.data_generator import generate_booking_data
 
 import pytest
 
+from framework.utils.helpers import assert_booking_data_matches
+
 @pytest.mark.post
 @pytest.mark.booking
 @pytest.mark.api
 @pytest.mark.smoke
-def test_post_booking(booking_service, booking_data, validate_booking):
-    response = booking_service.create_booking(booking_data)
+def test_post_booking(created_booking, booking_service, validate_booking):
+    new_booking = created_booking["response_data"]
 
-    response_data = response.json()
+    validate_booking(new_booking)
 
-    # validate bookings against schema
-    validate_booking(response_data)
+    assert_booking_data_matches(new_booking, created_booking["request_data"])
 
     # id exists
-    assert "id" in response_data
+    assert "id" in new_booking
 
-    # all other fields are the same
-    assert response_data["first_name"] == booking_data["first_name"]
-    assert response_data["last_name"] == booking_data["last_name"]
-    assert response_data["total_price"] == booking_data["total_price"]
-    assert response_data["deposit_paid"] == booking_data["deposit_paid"]
-    assert response_data["check_in"] == booking_data["check_in"]
-    assert response_data["check_out"] == booking_data["check_out"]
-    assert response_data["additional_needs"] == booking_data["additional_needs"]
+    # verify we can retrieve the booking and it matches the created data
+    get_response = booking_service.get_booking(new_booking["id"])
+    assert get_response.status_code == 200
+    assert_booking_data_matches(get_response.json(), new_booking)
 
 @pytest.mark.post
 @pytest.mark.booking

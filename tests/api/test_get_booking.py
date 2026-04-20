@@ -1,33 +1,25 @@
 import pytest
-from jsonschema import validate, ValidationError
 
-@pytest.mark.get_booking
+from framework.utils.helpers import assert_booking_data_matches
+
+@pytest.mark.get
+@pytest.mark.api
+@pytest.mark.booking
 @pytest.mark.smoke
-def test_get_booking_status(booking_service, bookings):
-    response = booking_service.get_booking(bookings[0]["id"])
-    assert response.status_code == 200
-
-@pytest.mark.get_booking
-def test_get_booking_structure(booking_service, bookings, validate_booking):
-    response = booking_service.get_booking(bookings[0]["id"])
-    booking = response.json()
-
-    validate_booking(booking)
-
-    assert "first_name" in booking
-    assert "check_in" in booking
-
-# validate direct get for newly created booking
-@pytest.mark.get_booking
-def test_get_new_booking_by_id(booking_service, booking_data, validate_booking):
-    new_booking_response = booking_service.create_booking(booking_data)
-    new_booking = new_booking_response.json()
+def test_get_booking(created_booking, booking_service, validate_booking):
+    new_booking = created_booking["response_data"]
 
     validate_booking(new_booking)
 
-    booking_response = booking_service.get_booking(new_booking["id"])
-    booking = booking_response.json()
+    assert_booking_data_matches(new_booking, created_booking["request_data"])
 
-    validate_booking(booking)
+    # MAIN TESTS
 
-    assert booking["id"] == new_booking["id"]
+    response = booking_service.get_booking(new_booking["id"])
+    assert response.status_code == 200
+
+    response_data = response.json()
+
+    validate_booking(response_data)
+
+    assert_booking_data_matches(response_data, new_booking)

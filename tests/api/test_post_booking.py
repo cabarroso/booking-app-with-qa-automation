@@ -41,18 +41,22 @@ def test_missing_field(booking_service, booking_data, field):
 @pytest.mark.post
 @pytest.mark.booking
 @pytest.mark.api
-@pytest.mark.parametrize("field, value", 
-                        [("first_name", 1337), 
-                         ("total_price", "fifty"), 
-                         ("check_in", 3.14),
-                         ("deposit_paid", "notabool")],
+@pytest.mark.parametrize("field, value, detail_type", 
+                        [("first_name", 1337, "string_type"), 
+                         ("total_price", "fifty", "int_parsing"), 
+                         ("check_in", 3.14, "date_from_datetime_inexact"),
+                         ("deposit_paid", "notabool", "bool_parsing")],
                         ids=["first_name", "total_price", "check_in", "deposit_paid"])
-def test_invalid_value_type(booking_service, booking_data, field, value):
+def test_invalid_value_type(booking_service, booking_data, field, value, detail_type):
     booking_data[field] = value
 
     response = booking_service.create_booking(booking_data)
 
     assert response.status_code == 422
+    fail_response_data = response.json()
+    assert fail_response_data["detail"][0]["type"] == detail_type
+    assert fail_response_data["detail"][0]["loc"][-1] == field
+    
 
 @pytest.mark.post
 @pytest.mark.booking

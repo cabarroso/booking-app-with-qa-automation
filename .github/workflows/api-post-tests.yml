@@ -2,9 +2,9 @@ name: Run API Post Tests
 
 on:
   push:
-    branches: [ fix-post-api-tests ]
+    branches: [ fix-api-post-tests ]
   pull_request:
-    branches: [ fix-post-api-tests ]
+    branches: [ fix-api-post-tests ]
 
 jobs:
   test:

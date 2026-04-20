@@ -1,52 +1,74 @@
 import pytest
 
-@pytest.mark.smoke
-@pytest.mark.put_booking
-def test_update_booking_status(booking_service, booking_data, last_booking_id):
-    response = booking_service.update_booking(last_booking_id, booking_data)
-    assert response.status_code == 200
+from framework.utils.helpers import assert_booking_data_matches
 
-@pytest.mark.put_booking
-def test_update_booking(booking_service, booking_data, last_booking_id, validate_booking):
-    response = booking_service.update_booking(last_booking_id, booking_data)
-    updated_booking = response.json()
+@pytest.mark.put
+@pytest.mark.api
+@pytest.mark.booking
+def test_update_booking(created_booking, booking_service, booking_data, validate_booking):
+    new_booking = created_booking["response_data"]
+
+    validate_booking(new_booking)
+
+    assert_booking_data_matches(new_booking, created_booking["request_data"])
+
+    # MAIN TESTS
+    put_response = booking_service.update_booking(new_booking["id"], booking_data)
+    assert put_response.status_code == 200
+    updated_booking = put_response.json()
 
     validate_booking(updated_booking)
 
-    assert updated_booking["id"] == last_booking_id
-    assert updated_booking["first_name"] == booking_data["first_name"]
-    assert updated_booking["last_name"] == booking_data["last_name"]
-    assert updated_booking["total_price"] == booking_data["total_price"]
-    assert updated_booking["deposit_paid"] == booking_data["deposit_paid"]
-    assert updated_booking["check_in"] == booking_data["check_in"]
-    assert updated_booking["check_out"] == booking_data["check_out"]
-    assert updated_booking["additional_needs"] == booking_data["additional_needs"]
+    assert updated_booking["id"] == new_booking["id"]
+    assert_booking_data_matches(updated_booking, booking_data)
 
-@pytest.mark.put_booking
-def test_update_booking_id_doesnt_exist(booking_service, booking_data, last_booking_id):
-    response = booking_service.update_booking(last_booking_id + 1, booking_data)
+@pytest.mark.put
+@pytest.mark.api
+@pytest.mark.booking
+def test_update_booking_id_doesnt_exist(booking_service, booking_data):
+    response = booking_service.update_booking(0, booking_data)
 
     assert response.status_code >= 400
 
-@pytest.mark.put_booking
+@pytest.mark.put
+@pytest.mark.api
+@pytest.mark.booking
 @pytest.mark.parametrize("field", ["first_name", "total_price", "check_in"])
-def test_update_booking_missing_field(booking_service, booking_data, last_booking_id, field):
+def test_update_booking_missing_field(created_booking, booking_service, booking_data, validate_booking, field):
+    new_booking = created_booking["response_data"]
+
+    validate_booking(new_booking)
+
+    assert_booking_data_matches(new_booking, created_booking["request_data"])
+
+    # MAIN TESTS
+    
     del booking_data[field]
 
-    response = booking_service.update_booking(last_booking_id, booking_data)
+    response = booking_service.update_booking(new_booking["id"], booking_data)
 
     assert response.status_code == 422
 
-@pytest.mark.put_booking
+@pytest.mark.put
+@pytest.mark.api
+@pytest.mark.booking
 @pytest.mark.parametrize("field, value", 
                         [("first_name", 1337),
                          ("total_price", "fifty dollars"),
                          ("check_in", 3.14),
                          ("deposit_paid", "notabool")],
                         ids=["first_name", "total_price", "check_in", "deposit_paid"])
-def test_update_booking_invalid_value_type(booking_service, booking_data, last_booking_id, field, value):
+def test_update_booking_invalid_value_type(created_booking, booking_service, booking_data, validate_booking, field, value):
+    new_booking = created_booking["response_data"]
+
+    validate_booking(new_booking)
+
+    assert_booking_data_matches(new_booking, created_booking["request_data"])
+
+    # MAIN TESTS
+
     booking_data[field] = value
 
-    response = booking_service.update_booking(last_booking_id, booking_data)
+    response = booking_service.update_booking(new_booking["id"], booking_data)
 
     assert response.status_code == 422

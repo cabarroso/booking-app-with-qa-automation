@@ -3,19 +3,10 @@ from framework.utils.data_generator import generate_booking_data
 
 import pytest
 
+@pytest.mark.post
+@pytest.mark.booking
+@pytest.mark.api
 @pytest.mark.smoke
-@pytest.mark.post
-@pytest.mark.booking
-@pytest.mark.api
-def test_post_booking_status(booking_service, booking_data):
-    response = booking_service.create_booking(booking_data)
-
-    # status code
-    assert response.status_code == 201
-
-@pytest.mark.post
-@pytest.mark.booking
-@pytest.mark.api
 def test_post_booking(booking_service, booking_data, validate_booking):
     response = booking_service.create_booking(booking_data)
 

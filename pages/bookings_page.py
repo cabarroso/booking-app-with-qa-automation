@@ -102,12 +102,18 @@ class BookingsPage():
         self.last_booking_delete_button_locator.click()
 
     def wait_for_booking_row(self, booking_id: int, timeout: int = 5000):
+        self.reload()
         booking_row = self.get_booking_row_by_id(booking_id)
         expect(booking_row).to_be_visible(timeout=timeout)
 
     def wait_for_booking_row_absence(self, booking_id: int, timeout: int = 5000):
+        self.reload()
         booking_row = self.get_booking_row_by_id(booking_id)
         expect(booking_row).not_to_be_visible(timeout=timeout)
         
     def booking_row_is_present(self, booking_id: int) -> bool:
         return self.get_booking_row_by_id(booking_id).count() > 0
+    
+    def delete_booking_by_id(self, booking_id: int):
+        delete_button = self.get_booking_row_by_id(booking_id).get_by_role("button", name="Delete")
+        delete_button.click()

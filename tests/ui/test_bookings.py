@@ -27,12 +27,14 @@ def test_delete_booking_from_bookings_page(bookings_page, created_booking, booki
 
     # MAIN TESTS
 
-    # Before deleting, assert booking row is present in UI
+    # Before deleting, assert booking row is present and visible in UI
     assert bookings_page.booking_row_is_present(new_booking["id"])
+    expect(bookings_page.get_booking_row_by_id(new_booking["id"])).to_be_visible()
     
     # Delete booking via UI
     bookings_page.delete_booking_by_id(new_booking["id"])
     bookings_page.page.wait_for_load_state("networkidle")
 
-    # After deletion, assert booking row is no longer present in UI
+    # After deletion, assert booking row is no longer present and visible in UI
     assert not bookings_page.booking_row_is_present(new_booking["id"])
+    expect(bookings_page.get_booking_row_by_id(new_booking["id"])).not_to_be_visible()

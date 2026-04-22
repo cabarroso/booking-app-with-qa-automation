@@ -61,3 +61,27 @@ def created_booking(booking_service: BookingService, booking_data: dict) -> Gene
         pytest.fail(f"Cleanup failed for booking ID={new_booking['id']} with status code {cleanup_response.status_code}")
     # log cleanup for CI visibility
     print(f"[TEARDOWN] Deleted booking ID={new_booking['id']}")
+
+@pytest.fixture
+def three_created_bookings(booking_service: BookingService) -> Generator[list, None, None]:
+    created_bookings = []
+    booking_data = generate_booking_data()
+    for i in range(3):
+        response = booking_service.create_booking(booking_data)
+        if response.status_code != 201:
+            pytest.fail(f"Booking creation failed with status code {response.status_code}")
+        new_booking = response.json()
+        created_bookings.append(new_booking)
+        print(f"[SETUP] Created booking ID={new_booking['id']}")
+
+    yield created_bookings
+
+    for booking in created_bookings:
+        cleanup_response = booking_service.delete_booking(booking["id"])
+        if cleanup_response.status_code not in [204, 404]:
+            pytest.fail(f"Cleanup failed for booking ID={booking['id']} with status code {cleanup_response.status_code}")
+        print(f"[TEARDOWN] Deleted booking ID={booking['id']}")
+
+
+
+

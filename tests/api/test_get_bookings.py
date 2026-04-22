@@ -51,13 +51,27 @@ def test_get_bookings_matches_get_booking_data(created_booking, booking_service)
     booking_in_list = matching_bookings[0]
     assert_booking_data_matches(booking_in_list, new_booking)
 
-# @pytest.mark.get
-# @pytest.mark.bookings
-# @pytest.mark.api
-# @pytest.mark.smoke
-# def test_get_bookings_while_empty(created_booking, booking_service, validate_booking):
-#     # MUST IMPLEMENT LAST
-#     pass 
+@pytest.mark.get
+@pytest.mark.bookings
+@pytest.mark.api
+@pytest.mark.smoke
+def test_get_bookings_when_no_bookings_exist(booking_service):
+    # First, delete all existing bookings
+    response = booking_service.get_bookings()
+    assert response.status_code == 200
+
+    bookings = response.json()
+    for booking in bookings:
+        del_response = booking_service.delete_booking(booking["id"])
+        assert del_response.status_code in [204, 404]
+
+    # Now get bookings again
+    response = booking_service.get_bookings()
+    assert response.status_code == 200
+
+    bookings = response.json()
+    assert isinstance(bookings, list)
+    assert len(bookings) == 0
 
     
     

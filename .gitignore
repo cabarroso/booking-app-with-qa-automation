@@ -3,3 +3,5 @@ logs/
 __pycache__/
 *.pyc
 .pytest_cache/
+dump_project.py
+project_dump.txt

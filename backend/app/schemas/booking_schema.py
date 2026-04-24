@@ -28,7 +28,7 @@ class BookingCreate(BaseModel):
         return value
 
 class BookingResponse(BookingCreate):
-    id: int
+    id: int = Field(..., gt=0)
 
     class Config:
         from_attributes = True

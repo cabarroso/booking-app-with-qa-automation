@@ -2,9 +2,9 @@ import pytest
 
 from framework.utils.helpers import assert_booking_data_matches
 
-@pytest.mark.delete
 @pytest.mark.api
 @pytest.mark.booking
+@pytest.mark.delete
 def test_delete_booking_removes_booking(booking_service, created_booking, validate_booking):
     # SETUP - create a booking to delete
     new_booking = created_booking["response_data"]
@@ -24,10 +24,9 @@ def test_delete_booking_removes_booking(booking_service, created_booking, valida
     post_delete_response = booking_service.get_booking(new_booking_id)
     assert post_delete_response.status_code == 404
 
-
-@pytest.mark.delete
 @pytest.mark.api
 @pytest.mark.booking
+@pytest.mark.delete
 def test_delete_booking_invalid_id_returns_404(booking_service):
     # MAIN TEST - attempt to delete a non-existent booking and verify 404 response
     get_response = booking_service.get_booking(0)

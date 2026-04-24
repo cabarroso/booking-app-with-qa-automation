@@ -22,11 +22,11 @@ def test_successfully_update_booking(created_booking, booking_service, booking_d
 @pytest.mark.api
 @pytest.mark.booking
 @pytest.mark.put
-def test_update_booking_id_doesnt_exist(booking_service, booking_data):
+def test_update_invalid_booking_id_returns_400(booking_service, booking_data):
     response = booking_service.update_booking(0, booking_data)
 
-    assert response.status_code == 404
-    assert response.json() == {"detail": "Booking not found"}
+    assert response.status_code == 400
+    assert response.json() == {"detail": "Invalid booking ID"}
 
 @pytest.mark.api
 @pytest.mark.booking

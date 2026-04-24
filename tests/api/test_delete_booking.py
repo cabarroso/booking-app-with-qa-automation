@@ -27,12 +27,12 @@ def test_delete_booking_removes_booking(booking_service, created_booking, valida
 @pytest.mark.api
 @pytest.mark.booking
 @pytest.mark.delete
-def test_delete_booking_invalid_id_returns_404(booking_service):
+def test_delete_booking_invalid_id_returns_400(booking_service):
     # MAIN TEST - attempt to delete a non-existent booking and verify 404 response
     get_response = booking_service.get_booking(0)
-    assert get_response.status_code == 404
+    assert get_response.status_code == 400
 
     delete_response = booking_service.delete_booking(0)
-    assert delete_response.status_code == 404
+    assert delete_response.status_code == 400
 
-    assert delete_response.json() == {"detail": "Booking not found"}
+    assert delete_response.json() == {"detail": "Invalid booking ID"}

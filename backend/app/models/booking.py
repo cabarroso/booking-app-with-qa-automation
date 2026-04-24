@@ -1,9 +1,13 @@
-from sqlalchemy import Column, Integer, String, Boolean
+from sqlalchemy import CheckConstraint, Column, Integer, String, Boolean
 from app.database import Base
 
 class Booking(Base):
 
     __tablename__ = "bookings"
+
+    __table_args__ = (
+        CheckConstraint('id > 0', name='check_id_positive'),
+    )
 
     id = Column(Integer, primary_key=True, index=True)
     first_name = Column(String, nullable=False)

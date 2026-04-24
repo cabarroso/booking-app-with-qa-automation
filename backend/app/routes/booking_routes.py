@@ -41,6 +41,10 @@ def get_bookings(db: Session = Depends(get_db)):
 
 @router.get("/bookings/{booking_id}", response_model=BookingResponse, status_code=200)
 def get_booking(booking_id: int, db: Session = Depends(get_db)):
+
+    if booking_id <= 0:
+        raise HTTPException(status_code=400, detail="Invalid booking ID")
+
     booking = db.get(Booking, booking_id)
 
     if not booking:
@@ -50,6 +54,10 @@ def get_booking(booking_id: int, db: Session = Depends(get_db)):
 
 @router.put("/bookings/{booking_id}", response_model=BookingResponse, status_code=200)
 def put_booking(booking_id: int, updated_booking: BookingCreate, db: Session = Depends(get_db)):
+    
+    if booking_id <= 0:
+        raise HTTPException(status_code=400, detail="Invalid booking ID")
+    
     booking = db.get(Booking, booking_id)
 
     if not booking:
@@ -71,6 +79,10 @@ def put_booking(booking_id: int, updated_booking: BookingCreate, db: Session = D
 
 @router.delete("/bookings/{booking_id}", status_code=204)
 def put_booking(booking_id: int, db: Session = Depends(get_db)):
+    
+    if booking_id <= 0:
+        raise HTTPException(status_code=400, detail="Invalid booking ID")
+    
     booking = db.get(Booking, booking_id)
     
     if not booking:

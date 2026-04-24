@@ -1,10 +1,10 @@
-name: Run API Booking Tests
+name: Run API Booking DELETE and PUT Tests
 
 on:
   push:
-    branches: [ refactor/api-tests ]
+    branches: [ fix/backend-id-restriction ]
   pull_request:
-    branches: [ refactor/api-tests ]
+    branches: [ fix/backend-id-restriction ]
 
 jobs:
   test:
@@ -30,7 +30,7 @@ jobs:
           done
 
       - name: Run tests
-        run: docker compose run --rm tests pytest -m "api and booking"
+        run: docker compose run --rm tests pytest -m "api and delete or api and put"
 
       - name: Shut down
         run: docker compose down

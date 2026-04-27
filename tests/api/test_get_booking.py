@@ -1,7 +1,11 @@
 import pytest
+import allure
 
 from framework.utils.helpers import assert_booking_data_matches
 
+@allure.title("Get Booking - Valid ID")
+@allure.description("Verify that the API successfully retrieves a booking with a valid ID")
+@allure.severity(allure.severity_level.CRITICAL)
 @pytest.mark.api
 @pytest.mark.booking
 @pytest.mark.get

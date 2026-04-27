@@ -1,11 +1,15 @@
+import allure
 import pytest
 
 from framework.utils.helpers import assert_booking_data_matches
 
+@allure.title("Delete Booking - Valid ID")
+@allure.description("Verify that the API successfully deletes a booking with a valid ID")
+@allure.severity(allure.severity_level.CRITICAL)
 @pytest.mark.api
 @pytest.mark.booking
 @pytest.mark.delete
-def test_delete_booking_removes_booking(booking_service, created_booking, validate_booking):
+def test_delete_booking_removes_booking(booking_service, created_booking):
     # SETUP - create a booking to delete
     new_booking = created_booking["response_data"]
 
@@ -24,6 +28,9 @@ def test_delete_booking_removes_booking(booking_service, created_booking, valida
     post_delete_response = booking_service.get_booking(new_booking_id)
     assert post_delete_response.status_code == 404
 
+@allure.title("Delete Booking - Invalid ID")
+@allure.description("Verify that the API returns a 422 error when attempting to delete a booking with an invalid ID (e.g., zero or negative)")
+@allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.api
 @pytest.mark.booking
 @pytest.mark.delete

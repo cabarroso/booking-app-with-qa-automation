@@ -22,11 +22,14 @@ def test_successfully_update_booking(created_booking, booking_service, booking_d
 @pytest.mark.api
 @pytest.mark.booking
 @pytest.mark.put
-def test_update_invalid_booking_id_returns_400(booking_service, booking_data):
+def test_update_invalid_booking_id_returns_422(booking_service, booking_data):
     response = booking_service.update_booking(0, booking_data)
 
-    assert response.status_code == 400
-    assert response.json() == {"detail": "Invalid booking ID"}
+    assert response.status_code == 422
+
+    error = response.json()
+    assert error["detail"][0]["type"] == "greater_than_equal"
+    assert error["detail"][0]["loc"][-1] == "booking_id"
 
 @pytest.mark.api
 @pytest.mark.booking

@@ -1,7 +1,11 @@
 import pytest
+import allure
 
 from framework.utils.helpers import assert_booking_data_matches
 
+@allure.title("Update Booking - Successfully Update a Newly Created Booking")
+@allure.description("Verify that a newly created booking contains updated fields with valid values.")
+@allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.api
 @pytest.mark.booking
 @pytest.mark.put
@@ -19,6 +23,10 @@ def test_successfully_update_booking(created_booking, booking_service, booking_d
     assert updated_booking["id"] == new_booking["id"]
     assert_booking_data_matches(updated_booking, booking_data)
 
+
+@allure.title("Update Booking - Invalid Booking ID")
+@allure.description("Verify that HTML status code 422 is returned when trying to update a booking with an invalid ID (e.g. 0 or negative)")
+@allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.api
 @pytest.mark.booking
 @pytest.mark.put
@@ -32,6 +40,9 @@ def test_update_invalid_booking_id_returns_422(booking_service, booking_data, bo
     assert error["detail"][0]["type"] == "greater_than_equal"
     assert error["detail"][0]["loc"][-1] == "booking_id"
 
+@allure.title("Update Booking - Missing Field")
+@allure.description("Verify that HTML status of 422 is returned when trying to update a booking with missing required fields")
+@allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.api
 @pytest.mark.booking
 @pytest.mark.put
@@ -51,6 +62,9 @@ def test_update_booking_missing_field(created_booking, booking_service, booking_
     assert put_response_data["detail"][0]["type"] == "missing"
     assert put_response_data["detail"][0]["loc"][-1] == field
 
+@allure.title("Update Booking - Invalid Field Type")
+@allure.description("Verify that the API returns a 422 error when fields in the updated data request have invalid data types")
+@allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.api
 @pytest.mark.booking
 @pytest.mark.put

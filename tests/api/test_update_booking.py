@@ -22,8 +22,9 @@ def test_successfully_update_booking(created_booking, booking_service, booking_d
 @pytest.mark.api
 @pytest.mark.booking
 @pytest.mark.put
-def test_update_invalid_booking_id_returns_422(booking_service, booking_data):
-    response = booking_service.update_booking(0, booking_data)
+@pytest.mark.parametrize("booking_id", [0, -1], ids=["zero_id", "negative_id"])
+def test_update_invalid_booking_id_returns_422(booking_service, booking_data, booking_id):
+    response = booking_service.update_booking(booking_id, booking_data)
 
     assert response.status_code == 422
 
@@ -35,7 +36,7 @@ def test_update_invalid_booking_id_returns_422(booking_service, booking_data):
 @pytest.mark.booking
 @pytest.mark.put
 @pytest.mark.parametrize("field", ["first_name", "total_price", "check_in"])
-def test_update_booking_missing_field(created_booking, booking_service, booking_data, validate_booking, field):
+def test_update_booking_missing_field(created_booking, booking_service, booking_data, field):
     new_booking = created_booking["response_data"]
 
     # MAIN TESTS
@@ -59,7 +60,7 @@ def test_update_booking_missing_field(created_booking, booking_service, booking_
                          ("check_in", 3.14, "date_from_datetime_inexact"),
                          ("deposit_paid", "notabool", "bool_parsing")],
                         ids=["first_name", "total_price", "check_in", "deposit_paid"])
-def test_update_booking_invalid_value_type(created_booking, booking_service, booking_data, validate_booking, field, value, detail_type):
+def test_update_booking_invalid_value_type(created_booking, booking_service, booking_data, field, value, detail_type):
     new_booking = created_booking["response_data"]
 
     # MAIN TESTS

@@ -27,10 +27,11 @@ def test_delete_booking_removes_booking(booking_service, created_booking, valida
 @pytest.mark.api
 @pytest.mark.booking
 @pytest.mark.delete
-def test_delete_booking_invalid_id_returns_422(booking_service):
+@pytest.mark.parametrize("booking_id", [0, -1], ids=["zero_id", "negative_id"])
+def test_delete_booking_invalid_id_returns_422(booking_service, booking_id):
     # MAIN TEST - attempt to delete a non-existent booking and verify 422 response
 
-    delete_response = booking_service.delete_booking(0)
+    delete_response = booking_service.delete_booking(booking_id)
     assert delete_response.status_code == 422
 
     error = delete_response.json()

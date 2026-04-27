@@ -2,9 +2,9 @@ name: Run API Booking DELETE and PUT Tests
 
 on:
   push:
-    branches: [ fix/backend-id-restriction ]
+    branches: [ fix/api-delete-update ]
   pull_request:
-    branches: [ fix/backend-id-restriction ]
+    branches: [ fix/api-delete-update ]
 
 jobs:
   test:

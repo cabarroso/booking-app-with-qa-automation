@@ -1,6 +1,6 @@
 from typing import List
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Path
 from sqlalchemy.orm import Session
 
 from app.database import SessionLocal
@@ -40,10 +40,7 @@ def get_bookings(db: Session = Depends(get_db)):
     return db.query(Booking).all()
 
 @router.get("/bookings/{booking_id}", response_model=BookingResponse, status_code=200)
-def get_booking(booking_id: int, db: Session = Depends(get_db)):
-
-    if booking_id <= 0:
-        raise HTTPException(status_code=400, detail="Invalid booking ID")
+def get_booking(booking_id: int = Path(..., ge=1), db: Session = Depends(get_db)):
 
     booking = db.get(Booking, booking_id)
 
@@ -53,15 +50,14 @@ def get_booking(booking_id: int, db: Session = Depends(get_db)):
     return booking
 
 @router.put("/bookings/{booking_id}", response_model=BookingResponse, status_code=200)
-def put_booking(booking_id: int, updated_booking: BookingCreate, db: Session = Depends(get_db)):
-    
-    if booking_id <= 0:
-        raise HTTPException(status_code=400, detail="Invalid booking ID")
+def put_booking(updated_booking: BookingCreate, booking_id: int = Path(..., ge=1), db: Session = Depends(get_db)):
     
     booking = db.get(Booking, booking_id)
 
     if not booking:
         raise HTTPException(status_code=404, detail="Booking not found")
+    
+    # update the booking with the new data
     
     booking.first_name = updated_booking.first_name
     booking.last_name = updated_booking.last_name
@@ -78,11 +74,8 @@ def put_booking(booking_id: int, updated_booking: BookingCreate, db: Session = D
     return booking
 
 @router.delete("/bookings/{booking_id}", status_code=204)
-def put_booking(booking_id: int, db: Session = Depends(get_db)):
-    
-    if booking_id <= 0:
-        raise HTTPException(status_code=400, detail="Invalid booking ID")
-    
+def delete_booking(booking_id: int = Path(..., ge=1), db: Session = Depends(get_db)):
+
     booking = db.get(Booking, booking_id)
     
     if not booking:

@@ -1,15 +1,22 @@
 import pytest
+import allure
 
 from playwright.sync_api import expect
 
 from framework.utils.helpers import assert_booking_data_matches
 
+allure.title("UI Bookings Page - Successfully Loaded")
+allure.description("Verify that bookings page successfully loads")
+allure.severity(allure.severity_level.BLOCKER)
 @pytest.mark.smoke
 @pytest.mark.ui
 @pytest.mark.bookings
 def test_bookings_page_successfully_loaded(bookings_page):
     expect(bookings_page.heading_locator).to_be_visible()
 
+allure.title("UI Bookings Page - Delete a Booking")
+allure.description("Verify that clicking on the delete button will delete the corresponding booking from the page.")
+allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.ui
 @pytest.mark.bookings
 @pytest.mark.delete

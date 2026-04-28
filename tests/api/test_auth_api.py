@@ -1,20 +1,22 @@
 import pytest
+import allure
 
-@pytest.mark.smoke
+@allure.title("API Login - Successful Login")
+@allure.description("API Login - Posting with valid credentials results in successful response with a login token.")
+@allure.severity(allure.severity_level.BLOCKER)
+@pytest.mark.api
 @pytest.mark.auth
 @pytest.mark.login
-def test_login_status(auth_service, valid_login_credentials):
+def test_login_status_200(auth_service, valid_login_credentials):
     response = auth_service.login(valid_login_credentials)
-
     assert response.status_code == 200
-
-@pytest.mark.auth
-@pytest.mark.login
-def test_login(auth_service, valid_login_credentials):
-    response = auth_service.login(valid_login_credentials)
 
     assert "token" in response.json()
 
+@allure.title("API Login - Failed Login")
+@allure.description("Posting with invalid credentials results in status code 400 with no token.")
+@allure.severity(allure.severity_level.CRITICAL)
+@pytest.mark.api
 @pytest.mark.auth
 @pytest.mark.login
 @pytest.mark.parametrize("credentials", 

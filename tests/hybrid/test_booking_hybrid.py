@@ -1,9 +1,14 @@
 import pytest
+import allure
+
 from playwright.sync_api import expect
 
 from framework.utils.helpers import assert_booking_data_matches
 
 # Idea: to create a booking via API and verify it appears in the UI, then cleanup
+@allure.title("Hybrid Create Booking - Successfully Create Booking")
+@allure.description("Creating a booking via API results in a booking row created on the Bookings Page.")
+@allure.severity(allure.severity_level.CRITICAL)
 @pytest.mark.hybrid
 @pytest.mark.booking
 @pytest.mark.create
@@ -33,6 +38,9 @@ def test_create_booking_via_api(created_booking, booking_service, bookings_page,
     assert_booking_data_matches(new_booking, ui_new_booking_data)
 
 # Idea: to create a booking via API, verify it appears in the UI, then delete via API and verify it no longer appears in the UI
+@allure.title("Hybrid Delete Booking - Successfully Delete Booking")
+@allure.description("Deleting a booking via API deletes the corresponding row in the UI for Bookings Page.")
+@allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.hybrid
 @pytest.mark.booking
 @pytest.mark.delete

@@ -1,10 +1,14 @@
 import pytest
+import allure
 
 from playwright.sync_api import expect
 
 from framework.utils.helpers import assert_booking_data_matches
 from pages.bookings_page import BookingsPage
 
+@allure.title("UI Create Booking Page - Successfully Loaded")
+@allure.description("Verify that the create booking page loads when accessed by user.")
+@allure.severity(allure.severity_level.BLOCKER)
 @pytest.mark.smoke
 @pytest.mark.ui
 @pytest.mark.post
@@ -12,6 +16,10 @@ from pages.bookings_page import BookingsPage
 def test_create_booking_successfully_loaded(create_booking_page):
     expect(create_booking_page.heading_locator).to_be_visible()
 
+
+@allure.title("UI Create Booking Page - Successfully Create Booking")
+@allure.description("Use the form on the page to successfully create a booking after user submits the form.")
+@allure.severity(allure.severity_level.CRITICAL)
 @pytest.mark.ui
 @pytest.mark.post
 @pytest.mark.smoke

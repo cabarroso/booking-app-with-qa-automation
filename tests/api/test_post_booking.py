@@ -3,7 +3,7 @@ import allure
 
 from framework.utils.helpers import assert_booking_data_matches
 
-@allure.title("Successfully create a booking with valid data")
+@allure.title("API Post Booking - Successfully Created Booking")
 @allure.description("Test that a booking can be created when all required fields are provided with valid data")
 @allure.severity(allure.severity_level.CRITICAL)
 @pytest.mark.api
@@ -27,7 +27,7 @@ def test_successfully_post_booking(created_booking, booking_service, validate_bo
     assert response.status_code == 200
     assert_booking_data_matches(response.json(), request_data)
 
-@allure.title("Attempt to create a booking with missing required fields")
+@allure.title("API Post Booking - Missing Field")
 @allure.description("Verify that the API returns a 422 error when required fields are missing from the booking creation request")
 @allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.api
@@ -46,7 +46,7 @@ def test_missing_field_status_422(booking_service, booking_data, field):
     assert fail_response_data["detail"][0]["msg"] == "Field required"
     assert fail_response_data["detail"][0]["loc"][-1] == field
 
-@allure.title("Attempt to create a booking with invalid field types")
+@allure.title("API Post Booking - Invalid Value Type for Field")
 @allure.description("Verify that the API returns a 422 error when fields in the booking creation request have invalid data types")
 @allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.api
@@ -69,7 +69,7 @@ def test_invalid_value_type_status_422(booking_service, booking_data, field, val
     assert fail_response_data["detail"][0]["type"] == detail_type
     assert fail_response_data["detail"][0]["loc"][-1] == field
 
-@allure.title("Attempt to create a booking with excessively large input values")
+@allure.title("API Post Booking - Large Input")
 @allure.description("Verify that the API returns a 422 error when fields in the booking creation request have excessively large values that exceed validation limits")
 @allure.severity(allure.severity_level.MINOR)
 @pytest.mark.api
@@ -93,7 +93,7 @@ def test_large_input_status_422(booking_service, booking_data, field, value, det
     assert fail_response_data["detail"][0]["type"] == detail_type
     assert fail_response_data["detail"][0]["loc"][-1] == field
 
-@allure.title("Attempt to create a booking with empty field values")
+@allure.title("API Post Booking - Empty Field Value")
 @allure.description("Verify that the API returns a 422 error when fields in the booking creation request are empty")
 @allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.api
@@ -116,7 +116,7 @@ def test_empty_field_status_422(booking_service, booking_data, field, value, det
     assert fail_response_data["detail"][0]["type"] == detail_type
     assert fail_response_data["detail"][0]["loc"][-1] == field
 
-@allure.title("Attempt to create a booking with special characters in string fields")
+@allure.title("API Post Booking - Special Characters")
 @allure.description("Verify that the API returns a 422 error when string fields in the booking creation request contain special characters that violate validation rules")
 @allure.severity(allure.severity_level.CRITICAL)
 @pytest.mark.api

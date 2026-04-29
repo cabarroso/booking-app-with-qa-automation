@@ -7,7 +7,6 @@ from framework.utils.helpers import assert_booking_data_matches
 @allure.description("Verify that the API returns a list")
 @allure.severity(allure.severity_level.CRITICAL)
 @pytest.mark.api
-@pytest.mark.booking
 @pytest.mark.bookings
 @pytest.mark.get
 def test_get_bookings_returns_list(booking_service):
@@ -21,7 +20,6 @@ def test_get_bookings_returns_list(booking_service):
 @allure.description("Verify that the API includes a newly created booking in the list of bookings")
 @allure.severity(allure.severity_level.MINOR)
 @pytest.mark.api
-@pytest.mark.booking
 @pytest.mark.bookings
 @pytest.mark.get
 @pytest.mark.smoke
@@ -41,7 +39,6 @@ def test_get_bookings_includes_created_booking(created_booking, booking_service)
 @allure.description("Verify that each booking returned by the API has a unique ID")
 @allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.api
-@pytest.mark.booking
 @pytest.mark.bookings
 @pytest.mark.get
 def test_get_bookings_has_unique_ids(three_created_bookings):
@@ -52,7 +49,6 @@ def test_get_bookings_has_unique_ids(three_created_bookings):
 @allure.description("Verify that the booking data returned by the API matches the data of a newly created booking")
 @allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.api
-@pytest.mark.booking
 @pytest.mark.bookings
 @pytest.mark.get
 def test_get_bookings_matches_get_booking_data(created_booking, booking_service):

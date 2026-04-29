@@ -11,15 +11,21 @@ from framework.utils.helpers import assert_booking_data_matches
 @pytest.mark.get
 @pytest.mark.smoke
 def test_successfully_get_booking(created_booking, booking_service, validate_booking):
-    new_booking = created_booking["response_data"]
+    
+    with allure.step("[SETUP] Create a new booking"):
+        new_booking = created_booking["response_data"]
 
     # MAIN TESTS
+    with allure.step("Make a GET request with ID from the new booking"):
+        response = booking_service.get_booking(new_booking["id"])
 
-    response = booking_service.get_booking(new_booking["id"])
-    assert response.status_code == 200
+    with allure.step("Verify response contains status code of 200"):
+        assert response.status_code == 200
 
     response_data = response.json()
 
-    validate_booking(response_data)
+    with allure.step("Validate response payload against the Booking schema"):
+        validate_booking(response_data)
 
-    assert_booking_data_matches(response_data, created_booking["request_data"])
+    with allure.step("Verify response payload contains identical booking data to the initial request data that created the new booking"):
+        assert_booking_data_matches(response_data, created_booking["request_data"])

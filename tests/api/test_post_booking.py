@@ -11,21 +11,27 @@ from framework.utils.helpers import assert_booking_data_matches
 @pytest.mark.post
 @pytest.mark.smoke
 def test_successfully_post_booking(created_booking, booking_service, validate_booking):
-    request_data = created_booking["request_data"]
-    new_booking = created_booking["response_data"]
+    
+    with allure.step("Create a new booking"):
+        request_data = created_booking["request_data"]
+        new_booking = created_booking["response_data"]
 
-    validate_booking(new_booking)
+    with allure.step("Validate new booking against Booking schema"):
+        validate_booking(new_booking)
 
-    assert_booking_data_matches(new_booking, request_data)
+    with allure.step("Verify response payload matches request payload of the created booking"):
+        assert_booking_data_matches(new_booking, request_data)
 
-    # id exists
-    assert "id" in new_booking
+    with allure.step("Verify new booking data contains an ID number"):
+        # id exists
+        assert "id" in new_booking
 
-    # verify we can retrieve the booking and it matches the created data
-    response = booking_service.get_booking(new_booking["id"])
+    with allure.step("GET request to /bookings/{id} with new booking ID"):
+        # verify we can retrieve the booking and it matches the created data
+        response = booking_service.get_booking(new_booking["id"])
 
-    assert response.status_code == 200
-    assert_booking_data_matches(response.json(), request_data)
+    with allure.step("Verify response data from GET request matches request data of POST"):
+        assert_booking_data_matches(response.json(), request_data)
 
 @allure.title("API Post Booking - Missing Field")
 @allure.description("Verify that the API returns a 422 error when required fields are missing from the booking creation request")
@@ -35,16 +41,25 @@ def test_successfully_post_booking(created_booking, booking_service, validate_bo
 @pytest.mark.post
 @pytest.mark.parametrize("field", ["first_name", "total_price", "check_in"])
 def test_missing_field_status_422(booking_service, booking_data, field):
-    assert field in booking_data
-    del booking_data[field]
+    with allure.step("Initial verification that necessary field exists in test data"):
+        assert field in booking_data
 
-    response = booking_service.create_booking(booking_data)
+    with allure.step("Delete field from test data"):
+        del booking_data[field]
 
-    assert response.status_code == 422
+    with allure.step("Attempt to create booking with missing field in test data"):
+        response = booking_service.create_booking(booking_data)
+
+    with allure.step("Verify response contains status code of 422"):
+        assert response.status_code == 422
 
     fail_response_data = response.json()
-    assert fail_response_data["detail"][0]["msg"] == "Field required"
-    assert fail_response_data["detail"][0]["loc"][-1] == field
+
+    with allure.step("Verify error detail 'msg' contains 'Field required'"):
+        assert fail_response_data["detail"][0]["msg"] == "Field required"
+
+    with allure.step("Verify error detail contains field name for 'loc'"):
+        assert fail_response_data["detail"][0]["loc"][-1] == field
 
 @allure.title("API Post Booking - Invalid Value Type for Field")
 @allure.description("Verify that the API returns a 422 error when fields in the booking creation request have invalid data types")
@@ -59,15 +74,21 @@ def test_missing_field_status_422(booking_service, booking_data, field):
                          ("deposit_paid", "notabool", "bool_parsing")],
                         ids=["first_name", "total_price", "check_in", "deposit_paid"])
 def test_invalid_value_type_status_422(booking_service, booking_data, field, value, detail_type):
-    booking_data[field] = value
+    
+    with allure.step("Give value with invalid type to a field in test data"):
+        booking_data[field] = value
 
-    response = booking_service.create_booking(booking_data)
+    with allure.step("Attempt to create a booking with and invalid value type in test data"):
+        response = booking_service.create_booking(booking_data)
 
-    assert response.status_code == 422
+    with allure.step("Verify response contains status code of 422"):
+        assert response.status_code == 422
 
     fail_response_data = response.json()
-    assert fail_response_data["detail"][0]["type"] == detail_type
-    assert fail_response_data["detail"][0]["loc"][-1] == field
+
+    with allure.step("Verify error detail"):
+        assert fail_response_data["detail"][0]["type"] == detail_type
+        assert fail_response_data["detail"][0]["loc"][-1] == field
 
 @allure.title("API Post Booking - Large Input")
 @allure.description("Verify that the API returns a 422 error when fields in the booking creation request have excessively large values that exceed validation limits")
@@ -83,15 +104,21 @@ def test_invalid_value_type_status_422(booking_service, booking_data, field, val
                          ],
                          ids=["first_name", "last_name", "total_price"])
 def test_large_input_status_422(booking_service, booking_data, field, value, detail_type):
-    booking_data[field] = value
+    
+    with allure.step("Put large input value in test data"):
+        booking_data[field] = value
 
-    response = booking_service.create_booking(booking_data)
+    with allure.step("Attempt to create a booking with test data"):
+        response = booking_service.create_booking(booking_data)
 
-    assert response.status_code == 422
+    with allure.step("Verify response contains status code of 422"):
+        assert response.status_code == 422
 
     fail_response_data = response.json()
-    assert fail_response_data["detail"][0]["type"] == detail_type
-    assert fail_response_data["detail"][0]["loc"][-1] == field
+
+    with allure.step("Verify error detail"):
+        assert fail_response_data["detail"][0]["type"] == detail_type
+        assert fail_response_data["detail"][0]["loc"][-1] == field
 
 @allure.title("API Post Booking - Empty Field Value")
 @allure.description("Verify that the API returns a 422 error when fields in the booking creation request are empty")
@@ -107,14 +134,21 @@ def test_large_input_status_422(booking_service, booking_data, field, value, det
                          ],
                          ids=["first_name", "last_name", "total_price"])
 def test_empty_field_status_422(booking_service, booking_data, field, value, detail_type):
-    booking_data[field] = value
+    
+    with allure.step("Give a field in test data an empty value"):
+        booking_data[field] = value
 
-    response = booking_service.create_booking(booking_data)
+    with allure.step("Attempt to create a booking with test data"):
+        response = booking_service.create_booking(booking_data)
 
-    assert response.status_code == 422
+    with allure.step("Verify response contains status of 422"):
+        assert response.status_code == 422
+
     fail_response_data = response.json()
-    assert fail_response_data["detail"][0]["type"] == detail_type
-    assert fail_response_data["detail"][0]["loc"][-1] == field
+
+    with allure.step("Verify error detail"):
+        assert fail_response_data["detail"][0]["type"] == detail_type
+        assert fail_response_data["detail"][0]["loc"][-1] == field
 
 @allure.title("API Post Booking - Special Characters")
 @allure.description("Verify that the API returns a 422 error when string fields in the booking creation request contain special characters that violate validation rules")
@@ -129,12 +163,18 @@ def test_empty_field_status_422(booking_service, booking_data, field, value, det
                          ],
                          ids=["first_name", "last_name"])
 def test_special_chars_status_422(booking_service, booking_data, field, value, detail_type):
-    booking_data[field] = value
+    
+    with allure.step("Put special character as value for a string field in test data"):
+        booking_data[field] = value
 
-    response = booking_service.create_booking(booking_data)
+    with allure.step("Attempt to create a new booking with test data"):
+        response = booking_service.create_booking(booking_data)
 
-    assert response.status_code == 422
+    with allure.step("Verify response contains status code of 422"):
+        assert response.status_code == 422
 
     fail_response_data = response.json()
-    assert fail_response_data["detail"][0]["type"] == detail_type
-    assert fail_response_data["detail"][0]["loc"][-1] == field
+
+    with allure.step("Verify error detail"):
+        assert fail_response_data["detail"][0]["type"] == detail_type
+        assert fail_response_data["detail"][0]["loc"][-1] == field

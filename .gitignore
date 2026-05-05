@@ -5,3 +5,5 @@ __pycache__/
 .pytest_cache/
 dump_project.py
 project_dump.txt
+allure-results/
+allure-report/

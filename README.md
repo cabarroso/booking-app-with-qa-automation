@@ -32,7 +32,6 @@ Users can:
 
 * create bookings
 * view bookings
-* update bookings
 * delete bookings
 
 ---
@@ -143,15 +142,15 @@ project/
 │
 ├── backend/
 │   ├── app/
-│   ├── models/
-│   ├── routes/
-│   └── database/
+│       ├── models/
+│       ├── routes/
+│       ├── schemas/
+│       └── database
 │
 ├── frontend/
 │
 ├── framework/
 │   ├── services/
-│   ├── pages/
 │   ├── utils/
 │   └── fixtures/
 │
@@ -160,8 +159,10 @@ project/
 │   ├── ui/
 │   └── integration/
 │
+├── pages/
+│
 ├── logs/
-├── reports/
+├── allure-results/
 │
 ├── docker-compose.yml
 ├── pytest.ini
@@ -176,7 +177,7 @@ project/
 ## Clone Repository
 
 ```bash id="u06sln"
-git clone <your-repo-url>
+git clone https://github.com/cabarroso/booking-app-with-qa-automation
 cd booking-app-with-qa-automation
 ```
 

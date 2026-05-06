@@ -345,17 +345,6 @@ FRONTEND_URL=http://localhost:5173
 
 ---
 
-# Future Improvements
-
-* Allure reporting
-* database validation testing
-* visual regression testing
-* performance/load testing
-* cross-browser execution
-* role-based authentication testing
-
----
-
 # Why This Project Exists
 
 This project was created to practice and demonstrate:
@@ -371,9 +360,9 @@ This project was created to practice and demonstrate:
 
 # Author
 
-Built by [Your Name]
+Built by Christian Barroso
 
-GitHub: [Your GitHub Profile]
+GitHub: https://github.com/cabarroso/
 
 ---
 

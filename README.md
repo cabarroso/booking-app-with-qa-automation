@@ -157,7 +157,7 @@ project/
 ├── tests/
 │   ├── api/
 │   ├── ui/
-│   └── integration/
+│   └── hybrid/
 │
 ├── pages/
 │

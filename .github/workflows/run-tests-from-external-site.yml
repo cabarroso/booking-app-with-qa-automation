@@ -1,0 +1,45 @@
+name: External Runner from Test Site
+
+on:
+  workflow_dispatch:
+    inputs:
+      suite:
+        description: "Test suite"
+        required: true
+        type: choice
+        options:
+          - all
+          - smoke
+          - api
+          - ui
+          - hybrid
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run tests
+        run: |
+          if [ "${{ github.event.inputs.suite }}" = "smoke" ]; then
+            pytest -m smoke
+          elif [ "${{ github.event.inputs.suite }}" = "api" ]; then
+            pytest -m api
+          elif [ "${{ github.event.inputs.suite }}" = "ui" ]; then
+            pytest -m ui
+          elif [ "${{ github.event.inputs.suite }}" = "hybrid" ]; then
+            pytest -m hybrid
+          else
+            pytest
+          fi

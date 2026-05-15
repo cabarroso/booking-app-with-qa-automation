@@ -19,27 +19,37 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
+      - name: setup Docker
+        run: docker --version
 
-      - name: Install dependencies
-        run: pip install -r requirements.txt
+      - name: Build containers
+        run: docker compose build
+
+      - name: start services
+        run: docker compose up -d
+
+      - name: Wait for backend
+        run: |
+          for i in {1..10}; do
+            curl -f http://localhost:8000 || sleep 3
+          done
 
       - name: Run tests
         run: |
           if [ "${{ github.event.inputs.suite }}" = "smoke" ]; then
-            pytest -m smoke
+            docker compose run --rm tests pytest -m smoke
           elif [ "${{ github.event.inputs.suite }}" = "api" ]; then
-            pytest -m api
+            docker compose run --rm tests pytest -m api
           elif [ "${{ github.event.inputs.suite }}" = "ui" ]; then
-            pytest -m ui
+            docker compose run --rm tests pytest -m ui
           elif [ "${{ github.event.inputs.suite }}" = "hybrid" ]; then
-            pytest -m hybrid
+            docker compose run --rm tests pytest -m hybrid
           else
-            pytest
+            docker compose run --rm tests pytest
           fi
+
+      - name: Shut down
+        run: docker compose down
